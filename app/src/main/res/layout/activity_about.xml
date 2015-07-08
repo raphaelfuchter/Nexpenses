@@ -133,88 +133,6 @@
             </android.support.v7.widget.CardView>
             <!-- Card Desenvolvedor -->
 
-            <LinearLayout
-                android:id="@+id/layout_icons"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal"
-                android:layout_below="@+id/about_developer"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-
-                <!-- Twitter -->
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:adjustViewBounds="true"
-                    android:maxWidth="50dp"
-                    android:maxHeight="50dp"
-                    android:src="@drawable/twitter_logo"
-                    android:id="@+id/twitter_icon"
-                    android:layout_below="@+id/about_developer"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="45dp"/>
-                <!-- Twitter -->
-
-                <!-- GitHub -->
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:adjustViewBounds="true"
-                    android:maxWidth="50dp"
-                    android:maxHeight="50dp"
-                    android:src="@drawable/github_logo"
-                    android:id="@+id/github_icon"
-                    android:layout_below="@+id/about_developer"
-                    android:layout_toLeftOf="@+id/linkedin_icon"
-                    android:layout_toStartOf="@+id/linkedin_icon"
-                    android:longClickable="false"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"/>
-                <!-- GitHub -->
-
-                <!-- Facebook -->
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:adjustViewBounds="true"
-                    android:maxWidth="50dp"
-                    android:maxHeight="50dp"
-                    android:src="@drawable/facebook__logo"
-                    android:id="@+id/facebook_icon"
-                    android:layout_below="@+id/about_developer"
-                    android:layout_toRightOf="@+id/twitter_icon"
-                    android:layout_toEndOf="@+id/twitter_icon"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"/>
-                <!-- Facebook -->
-
-                <!-- LinkedIn -->
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:adjustViewBounds="true"
-                    android:maxWidth="50dp"
-                    android:maxHeight="50dp"
-                    android:src="@drawable/linkedin_logo"
-                    android:id="@+id/linkedin_icon"
-                    android:layout_below="@+id/about_developer"
-                    android:layout_alignRight="@+id/about_developer"
-                    android:layout_alignEnd="@+id/about_developer"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="20dp"/>
-                <!-- LinkedIn -->
-
-            </LinearLayout>
-
             <!-- Card Google Play -->
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -225,7 +143,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 card_view:cardBackgroundColor="@color/card_blue"
                 card_view:cardCornerRadius="2dp"
-                android:layout_below="@+id/layout_icons"
+                android:layout_below="@+id/about_developer"
                 android:layout_marginTop="5dp">
 
                 <!-- Icone Google Play -->
