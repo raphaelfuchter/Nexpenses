@@ -14,15 +14,13 @@ public class AppPreferences {
     private SharedPreferences.Editor editor;
     private Context context;
 
-    public static final String KeyStartDelete = "prefStartDelete";
-    public static final String KeyPrimaryColor = "prefPrimaryColor";
-    public static final String KeyFABColor = "prefFABColor";
-    public static final String KeyFABShow = "prefFABShow";
-    public static final String KeyNavigationBlack = "prefNavigationBlack";
-    public static final String KeyCustomFilename = "prefCustomFilename";
+    public static final String KeyPassword = "prefPassword";
+    public static final String KeyPasswordBoolean = "prefPasswordBoolean";
     public static final String KeySortMode = "prefSortMode";
-    public static final String KeyIsRooted = "prefIsRooted";
-    public static final String KeyFavoriteApps = "prefFavoriteApps";
+
+    public static final String KeyPrimaryColor = "prefPrimaryColor";
+    public static final String KeyAccentColor = "prefAccentColor";
+    public static final String KeyNavigationColor = "prefNavigationColor";
 
     public AppPreferences(Context context) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -30,12 +28,20 @@ public class AppPreferences {
         this.context = context;
     }
 
-    public int getRootStatus() {
-        return sharedPreferences.getInt(KeyIsRooted, 0);
+    public String getPassoword() {
+        return sharedPreferences.getString(KeyPassword, "");
+    }
+    public void setPassword(String password) {
+        editor.putString(KeySortMode, password);
+        editor.commit();
     }
 
-    public void setRootStatus(int rootStatus) {
-        editor.putInt(KeyIsRooted, rootStatus);
+
+    public Boolean getPassowordBooleanPref() {
+        return sharedPreferences.getBoolean(KeyPasswordBoolean, false);
+    }
+    public void setPassowordBooleanPref(Boolean res) {
+        editor.putBoolean(KeyPasswordBoolean, res);
         editor.commit();
     }
 
@@ -47,22 +53,23 @@ public class AppPreferences {
         editor.commit();
     }
 
-    public int getFABColorPref() {
-        return sharedPreferences.getInt(KeyFABColor, context.getResources().getColor(R.color.fab));
+    public int getAccentColorPref() {
+        return sharedPreferences.getInt(KeyAccentColor, context.getResources().getColor(R.color.fab));
     }
-    public void setFABColorPref(Integer res) {
-        editor.putInt(KeyFABColor, res);
+    public void setAccentColorPref(Integer res) {
+        editor.putInt(KeyAccentColor, res);
         editor.commit();
     }
 
-    public Boolean getNavigationBlackPref() {
-        return sharedPreferences.getBoolean(KeyNavigationBlack, false);
+    public Boolean getNavigationColorPref() {
+        return sharedPreferences.getBoolean(KeyNavigationColor, false);
     }
-    public void setNavigationBlackPref(Boolean res) {
-        editor.putBoolean(KeyNavigationBlack, res);
+    public void setNavigationColorPref(Boolean res) {
+        editor.putBoolean(KeyNavigationColor, res);
         editor.commit();
     }
 
+    /*
     public Boolean getFABShowPref() {
         return sharedPreferences.getBoolean(KeyFABShow, false);
     }
@@ -70,31 +77,13 @@ public class AppPreferences {
         editor.putBoolean(KeyFABShow, res);
         editor.commit();
     }
-
-    public String getCustomFilename() {
-        return sharedPreferences.getString(KeyCustomFilename, "1");
-    }
-    public void setCustomFilename(String res) {
-        editor.putString(KeyCustomFilename, res);
-        editor.commit();
-    }
+    */
 
     public String getSortMode() {
         return sharedPreferences.getString(KeySortMode, "1");
     }
     public void setSortMode(String res) {
         editor.putString(KeySortMode, res);
-        editor.commit();
-    }
-
-    public Set<String> getFavoriteApps() {
-        return sharedPreferences.getStringSet(KeyFavoriteApps, new HashSet<String>());
-    }
-
-    public void setFavoriteApps(Set<String> favoriteApps) {
-        editor.remove(KeyFavoriteApps);
-        editor.commit();
-        editor.putStringSet(KeyFavoriteApps, favoriteApps);
         editor.commit();
     }
 

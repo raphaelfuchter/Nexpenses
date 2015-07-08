@@ -1,52 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
+
+    <!-- Configurações -->
     <PreferenceCategory
         android:title="@string/action_settings">
-        <Preference
-            android:key="prefDeleteAll"
-            android:title="@string/settings_delete_all"
-            android:summary="@string/settings_delete_all_description" />
-        <ListPreference
-            android:key="prefCustomFilename"
-            android:title="@string/settings_custom_filename"
-            android:entries="@array/filenameEntries"
-            android:entryValues="@array/filenameValues"
-            android:defaultValue="1" />
+
+        <!-- Senha -->
+        <CheckBoxPreference
+            android:key="prefPassword"
+            android:title="@string/settings_password"
+            android:summary="@string/settings_password_description"
+            android:defaultValue="false" />
+        <!-- Senha -->
+
+        <!-- Classificar por -->
         <ListPreference
             android:key="prefSortMode"
             android:title="@string/settings_sort_mode"
             android:entries="@array/sortEntries"
             android:entryValues="@array/sortValues"
             android:defaultValue="1" />
+        <!-- Classificar por -->
+
     </PreferenceCategory>
+    <!-- Configurações -->
+
+    <!-- Temas -->
     <PreferenceCategory
         android:title="@string/settings_customizations">
+
+        <!-- Cor Primária -->
         <yuku.ambilwarna.widget.AmbilWarnaPreference
             android:key="prefPrimaryColor"
             android:defaultValue="@color/primary"
             android:title="@string/settings_primary_color"
             android:summary="@string/settings_primary_color_description"/>
+        <!-- Cor Primária -->
+
+        <!-- Cor de destaque -->
         <yuku.ambilwarna.widget.AmbilWarnaPreference
             android:key="prefFABColor"
             android:defaultValue="@color/fab"
             android:title="@string/settings_fab_color"
             android:summary="@string/settings_fab_color_description"/>
+        <!-- Cor de destaque -->
+
+        <!-- Barra de navegação colorida -->
         <CheckBoxPreference
             android:key="prefNavigationBlack"
             android:title="@string/settings_navigation_black"
             android:summary="@string/settings_navigation_black_description"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
+        <!-- Barra de navegação colorida -->
+
+        <!-- Restaurar padrão -->
         <Preference
             android:key="prefDefaultValues"
             android:title="@string/settings_default_customization"
             android:summary="@string/settings_default_customization_description" />
+        <!-- Restaurar padrão -->
+
     </PreferenceCategory>
+    <!-- Temas -->
+
+    <!-- Backup -->
+    <PreferenceCategory
+        android:title="@string/settings_bkp">
+
+        <!-- Exportar Dados -->
+        <Preference
+            android:key="prefExport"
+            android:title="@string/settings_export"
+            android:summary="@string/settings_export_description" />
+        <!-- Exportar Dados -->
+
+        <!-- Importar Dados -->
+        <Preference
+            android:key="prefImport"
+            android:title="@string/settings_import"
+            android:summary="@string/settings_import_description" />
+        <!-- Importar Dados -->
+
+    </PreferenceCategory>
+    <!-- Backup -->
+
+    <!-- Ajuda e Feedback -->
     <PreferenceCategory
         android:title="@string/action_about">
+
+        <!-- Sobre -->
         <Preference
             android:key="prefVersion"
             android:title="@string/app_name"
             android:summary="@string/settings_about" />
+        <!-- Sobre -->
+
     </PreferenceCategory>
+    <!-- Ajuda e Feedback -->
+
 </PreferenceScreen>

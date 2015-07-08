@@ -3,12 +3,13 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
+    compileOptions.encoding = 'windows-1252' // write your encoding here
 
     defaultConfig {
         applicationId "com.rf17.nexpenses"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 12
+        versionCode 1
         versionName "0.0.1"
     }
     buildTypes {

@@ -35,7 +35,6 @@ public class AppActivity extends AppCompatActivity {
 
     // General variables
     private AppInfo appInfo;
-    private Set<String> appFavorites;
 
     // Configuration variables
     private int UNINSTALL_REQUEST_CODE = 1;
@@ -74,7 +73,7 @@ public class AppActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
             toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (!appPreferences.getNavigationBlackPref()) {
+            if (!appPreferences.getNavigationColorPref()) {
                 getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
             }
         }
@@ -150,8 +149,8 @@ public class AppActivity extends AppCompatActivity {
 
         // FAB
         fab.setIcon(R.drawable.ic_send_white);
-        fab.setColorNormal(appPreferences.getFABColorPref());
-        fab.setColorPressed(UtilsUI.darker(appPreferences.getFABColorPref(), 0.8));
+        fab.setColorNormal(appPreferences.getAccentColorPref());
+        fab.setColorPressed(UtilsUI.darker(appPreferences.getAccentColorPref(), 0.8));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +187,6 @@ public class AppActivity extends AppCompatActivity {
         Boolean appIsSystem = getIntent().getExtras().getBoolean("app_isSystem");
 
         appInfo = new AppInfo(appName, appApk, appVersion, appSource, appData, appIcon, appIsSystem);
-        appFavorites = appPreferences.getFavoriteApps();
 
     }
 
@@ -206,7 +204,7 @@ public class AppActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        item_favorite = menu.findItem(R.id.action_favorite);
+        //item_favorite = menu.findItem(R.id.action_favorite);
         //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
         return super.onPrepareOptionsMenu(menu);
     }
@@ -217,7 +215,7 @@ public class AppActivity extends AppCompatActivity {
             case R.id.home:
                 finish();
                 return true;
-            case R.id.action_favorite:
+            //case R.id.action_favorite:
                 //if (UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites)) {
                 //    appFavorites.remove(appInfo.getAPK());
                 //    appPreferences.setFavoriteApps(appFavorites);
@@ -226,7 +224,7 @@ public class AppActivity extends AppCompatActivity {
                 //    appPreferences.setFavoriteApps(appFavorites);
                 //}
                 //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
-                return true;
+             //   return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -30,12 +30,10 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     private Toolbar toolbar;
 
     // Settings variables
-    private SharedPreferences prefs;
-    private Preference prefVersion, prefDeleteAll, prefDefaultValues, prefNavigationBlack;
-    private AmbilWarnaPreference prefPrimaryColor, prefFABColor;
-    private ListPreference prefCustomFilename, prefSortMode;
-    private String versionName;
-    private int versionCode;
+    private AmbilWarnaPreference prefPrimaryColor;
+    private Preference prefNavigationColor;
+
+    private ListPreference prefSortMode;
     private Context context;
 
     @Override
@@ -45,22 +43,27 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         this.context = this;
         this.appPreferences = NexpensesApplication.getAppPreferences();
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        prefVersion = findPreference("prefVersion");
-        prefPrimaryColor = (AmbilWarnaPreference) findPreference("prefPrimaryColor");
-        prefFABColor = (AmbilWarnaPreference) findPreference("prefFABColor");
-        prefDeleteAll = findPreference("prefDeleteAll");
-        prefDefaultValues = findPreference("prefDefaultValues");
-        prefNavigationBlack = findPreference("prefNavigationBlack");
-        prefCustomFilename = (ListPreference) findPreference("prefCustomFilename");
+        // Configurações
         prefSortMode = (ListPreference) findPreference("prefSortMode");
+
+        // Temas
+        prefPrimaryColor = (AmbilWarnaPreference) findPreference("prefPrimaryColor");
+        AmbilWarnaPreference prefAccentColor = (AmbilWarnaPreference) findPreference("prefAccentColor");
+        prefNavigationColor = findPreference("prefNavigationColor");
+        Preference prefDefaultValues = findPreference("prefDefaultValues");
+
+        // Backup
+
+        // Sobre
+        Preference prefVersion = findPreference("prefVersion");
 
         setInitialConfiguration();
 
-        versionName = UtilsApp.getAppVersionName(context);
-        versionCode = UtilsApp.getAppVersionCode(context);
+        String versionName = UtilsApp.getAppVersionName(context);
+        int versionCode = UtilsApp.getAppVersionCode(context);
 
         prefVersion.setTitle(getResources().getString(R.string.app_name) + " v" + versionName + " (" + versionCode + ")");
         prefVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -72,35 +75,15 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             }
         });
 
-        // prefCustomFilename
-        setCustomFilenameSummary();
-
         // prefSortMode
         setSortModeSummary();
-
-        // prefDeleteAll
-        prefDeleteAll.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                prefDeleteAll.setSummary(R.string.deleting);
-                prefDeleteAll.setEnabled(false);
-                // Boolean deleteAll = UtilsApp.deleteAppFiles();
-                //if (deleteAll) {
-                //    prefDeleteAll.setSummary(R.string.deleting_done);
-                //} else {
-                //    prefDeleteAll.setSummary(R.string.deleting_error);
-                //}
-                prefDeleteAll.setEnabled(true);
-                return true;
-            }
-        });
 
         // prefDefaultValues
         prefDefaultValues.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 appPreferences.setPrimaryColorPref(getResources().getColor(R.color.primary));
-                appPreferences.setFABColorPref(getResources().getColor(R.color.fab));
+                appPreferences.setAccentColorPref(getResources().getColor(R.color.fab));
                 return true;
             }
         });
@@ -134,7 +117,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
             toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (!appPreferences.getNavigationBlackPref()) {
+            if (appPreferences.getNavigationColorPref()) {
                 getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
             }
         }
@@ -142,18 +125,13 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         // Pre-Lollipop devices
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             prefPrimaryColor.setEnabled(false);
-            prefNavigationBlack.setEnabled(false);
-            prefNavigationBlack.setDefaultValue(true);
+            prefNavigationColor.setEnabled(false);
+            prefNavigationColor.setDefaultValue(false);
         }
     }
 
-    private void setCustomFilenameSummary() {
-        int filenameValue = new Integer(appPreferences.getCustomFilename())-1;
-        prefCustomFilename.setSummary(getResources().getStringArray(R.array.filenameEntries)[filenameValue]);
-    }
-
     private void setSortModeSummary() {
-        int sortValue = new Integer(appPreferences.getSortMode())-1;
+        Integer sortValue = new Integer(appPreferences.getSortMode())-1;
         prefSortMode.setSummary(getResources().getStringArray(R.array.sortEntries)[sortValue]);
     }
 
@@ -161,9 +139,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
 
-        if (pref == prefCustomFilename) {
-            setCustomFilenameSummary();
-        } else if (pref == prefSortMode) {
+        if (pref == prefSortMode) {
             setSortModeSummary();
         }
     }

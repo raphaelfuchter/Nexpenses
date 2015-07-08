@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Nexpenses</string>
-    <string name="app_description">Gerenciador financeiro minimalista, intuitivo, bonito e customizável para Android</string>
+    <string name="app_description">Gerenciador financeiro minimalista, intuitivo, bonito e customizável para Android 4.0 e superiores</string>
 
     <!-- Labels -->
     <string name="action_lancamentos">Lançamentos</string>
@@ -10,16 +10,13 @@
     <string name="action_settings">Configurações</string>
     <string name="action_about">Ajuda e Feedback</string>
 
-    <string name="action_share">Share</string>
-    <string name="action_favorites">Favorites</string>
-
     <string name="send_to">Send \"%s\" using</string>
-    <string name="deleting">Deleting...</string>
-    <string name="loading">Loading...</string>
+    <string name="deleting">Excluindo...</string>
+    <string name="loading">Carregando...</string>
     <string name="deleting_done">Files deleted!</string>
     <string name="deleting_error">Something went wrong removing the files</string>
-    <string name="search">Search</string>
-    <string name="search_hint">Search by name...</string>
+    <string name="search">Pesquisar</string>
+    <string name="search_hint">Pesquisar...</string>
     <string name="search_noresults">No results were found for your search</string>
 
     <!-- Dialogs -->
@@ -60,10 +57,15 @@
     <string name="button_undo">Voltar</string>
 
     <!-- Settings -->
-    <string name="settings_delete_all">Delete all extracted APKs</string>
-    <string name="settings_delete_all_description">Remove all the extracted APKs stored in the extraction folder</string>
-    <string name="settings_custom_filename">Default filename for extracted APKs</string>
-    <string name="settings_sort_mode">Classificar Lançamentos por</string>
+    <string name="settings_bkp">Backup</string>
+    <string name="settings_password">Senha</string>
+    <string name="settings_password_description">Exigir senha ao iniciar o aplicativo.</string>
+    <string name="settings_export">Exportar dados</string>
+    <string name="settings_export_description">Exportar dados para o armazenamento do dispositivo.</string>
+    <string name="settings_import">Importar dados</string>
+    <string name="settings_import_description">Importar dados do armazenamento do dispositivo e substituir os dados do aplicativo</string>
+
+    <string name="settings_sort_mode">Classificar por</string>
     <string name="settings_customizations">Temas (Necessário Android 5.0+)</string>
     <string name="settings_primary_color">Cor Primária</string>
     <string name="settings_primary_color_description">A cor primária a ser usada. Padrão é Material Blue.</string>
