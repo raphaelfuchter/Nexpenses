@@ -1,13 +1,10 @@
-package com.javiersantos.mlmanager;
+package com.rf17.nexpenses;
 
 import android.app.Application;
 
-import com.javiersantos.mlmanager.utils.AppPreferences;
+import com.rf17.nexpenses.utils.AppPreferences;
 
-/**
- * Created by vijay.rawat01 on 6/21/15.
- */
-public class MLManagerApplication extends Application {
+public class NexpensesApplication extends Application {
 
     private static AppPreferences sAppPreferences;
 

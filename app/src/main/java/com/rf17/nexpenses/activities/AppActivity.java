@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.activities;
+package com.rf17.nexpenses.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,18 +19,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.javiersantos.mlmanager.AppInfo;
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.async.DeleteDataInBackground;
-import com.javiersantos.mlmanager.async.ExtractFileInBackground;
-import com.javiersantos.mlmanager.utils.AppPreferences;
-import com.javiersantos.mlmanager.utils.UtilsRoot;
-import com.javiersantos.mlmanager.utils.UtilsApp;
-import com.javiersantos.mlmanager.utils.UtilsDialog;
-import com.javiersantos.mlmanager.utils.UtilsUI;
+import com.rf17.nexpenses.AppInfo;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.UtilsApp;
+import com.rf17.nexpenses.utils.UtilsUI;
 
 import java.util.Set;
 
@@ -52,7 +47,7 @@ public class AppActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
         this.context = this;
-        this.appPreferences = MLManagerApplication.getAppPreferences();
+        this.appPreferences = NexpensesApplication.getAppPreferences();
 
         getInitialConfiguration();
         setInitialConfiguration();
@@ -146,10 +141,10 @@ public class AppActivity extends AppCompatActivity {
         extract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                        , String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
-                        , getResources().getString(R.string.dialog_saving_description));
-                new ExtractFileInBackground(context, dialog, appInfo).execute();
+                //MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
+                 //       , String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
+                  //      , getResources().getString(R.string.dialog_saving_description));
+                //new ExtractFileInBackground(context, dialog, appInfo).execute();
             }
         });
 
@@ -160,9 +155,9 @@ public class AppActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UtilsApp.copyFile(appInfo);
-                Intent shareIntent = UtilsApp.getShareIntent(UtilsApp.getOutputFilename(appInfo));
-                startActivity(Intent.createChooser(shareIntent, String.format(getResources().getString(R.string.send_to), appInfo.getName())));
+                //UtilsApp.copyFile(appInfo);
+                //Intent shareIntent = UtilsApp.getShareIntent(UtilsApp.getOutputFilename(appInfo));
+                //startActivity(Intent.createChooser(shareIntent, String.format(getResources().getString(R.string.send_to), appInfo.getName())));
             }
         });
 
@@ -212,7 +207,7 @@ public class AppActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         item_favorite = menu.findItem(R.id.action_favorite);
-        UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
+        //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -223,14 +218,14 @@ public class AppActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_favorite:
-                if (UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites)) {
-                    appFavorites.remove(appInfo.getAPK());
-                    appPreferences.setFavoriteApps(appFavorites);
-                } else {
-                    appFavorites.add(appInfo.getAPK());
-                    appPreferences.setFavoriteApps(appFavorites);
-                }
-                UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
+                //if (UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites)) {
+                //    appFavorites.remove(appInfo.getAPK());
+                //    appPreferences.setFavoriteApps(appFavorites);
+                //} else {
+                //    appFavorites.add(appInfo.getAPK());
+                //    appPreferences.setFavoriteApps(appFavorites);
+                //}
+                //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
                 return true;
         }
 

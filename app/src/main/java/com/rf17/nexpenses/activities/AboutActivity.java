@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.activities;
+package com.rf17.nexpenses.activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.utils.AppPreferences;
-import com.javiersantos.mlmanager.utils.UtilsApp;
-import com.javiersantos.mlmanager.utils.UtilsUI;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.UtilsApp;
+import com.rf17.nexpenses.utils.UtilsUI;
 
 public class AboutActivity extends AppCompatActivity {
     // Load Settings
@@ -23,7 +23,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        this.appPreferences = MLManagerApplication.getAppPreferences();
+        this.appPreferences = NexpensesApplication.getAppPreferences();
 
         setInitialConfiguration();
         setScreenElements();

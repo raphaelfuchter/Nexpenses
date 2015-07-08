@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.javiersantos.mlmanager"
+    package="com.rf17.nexpenses"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/MLManager"
-        android:name=".MLManagerApplication">
+        android:theme="@style/Nexpenses"
+        android:name=".NexpensesApplication">
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.rf17.nexpenses.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,13 +31,13 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".activities.AppActivity">
+            android:name="com.rf17.nexpenses.activities.AppActivity">
         </activity>
         <activity
-            android:name=".activities.SettingsActivity">
+            android:name="com.rf17.nexpenses.activities.SettingsActivity">
         </activity>
         <activity
-            android:name=".activities.AboutActivity">
+            android:name="com.rf17.nexpenses.activities.AboutActivity">
         </activity>
     </application>
 

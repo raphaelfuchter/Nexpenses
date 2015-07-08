@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.activities;
+package com.rf17.nexpenses.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.utils.AppPreferences;
-import com.javiersantos.mlmanager.utils.UtilsApp;
-import com.javiersantos.mlmanager.utils.UtilsUI;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.UtilsApp;
+import com.rf17.nexpenses.utils.UtilsUI;
 
 import yuku.ambilwarna.widget.AmbilWarnaPreference;
 
@@ -43,7 +43,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         this.context = this;
-        this.appPreferences = MLManagerApplication.getAppPreferences();
+        this.appPreferences = NexpensesApplication.getAppPreferences();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
@@ -84,12 +84,12 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             public boolean onPreferenceClick(Preference preference) {
                 prefDeleteAll.setSummary(R.string.deleting);
                 prefDeleteAll.setEnabled(false);
-                Boolean deleteAll = UtilsApp.deleteAppFiles();
-                if (deleteAll) {
-                    prefDeleteAll.setSummary(R.string.deleting_done);
-                } else {
-                    prefDeleteAll.setSummary(R.string.deleting_error);
-                }
+                // Boolean deleteAll = UtilsApp.deleteAppFiles();
+                //if (deleteAll) {
+                //    prefDeleteAll.setSummary(R.string.deleting_done);
+                //} else {
+                //    prefDeleteAll.setSummary(R.string.deleting_error);
+                //}
                 prefDeleteAll.setEnabled(true);
                 return true;
             }

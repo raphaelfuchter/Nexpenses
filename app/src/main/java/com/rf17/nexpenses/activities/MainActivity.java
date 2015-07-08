@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.activities;
+package com.rf17.nexpenses.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,13 +23,13 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.javiersantos.mlmanager.AppInfo;
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.adapters.AppAdapter;
-import com.javiersantos.mlmanager.utils.AppPreferences;
-import com.javiersantos.mlmanager.utils.UtilsApp;
-import com.javiersantos.mlmanager.utils.UtilsUI;
+import com.rf17.nexpenses.AppInfo;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.adapters.AppAdapter;
+import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.UtilsApp;
+import com.rf17.nexpenses.utils.UtilsUI;
 import com.mikepenz.materialdrawer.Drawer;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.yalantis.phoenix.PullToRefreshView;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.appPreferences = MLManagerApplication.getAppPreferences();
+        this.appPreferences = NexpensesApplication.getAppPreferences();
         this.context = this;
 
         setInitialConfiguration();
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             appAdapter = new AppAdapter(appList, context);
             appSystemList = createList(appSystemListName, appSystemListAPK, appSystemListVersion, appSystemListSource, appSystemListData, appSystemListIcon, true);
             appSystemAdapter = new AppAdapter(appSystemList, context);
-            appFavoriteAdapter = new AppAdapter(getFavoriteList(appList, appSystemList), context);
+            //appFavoriteAdapter = new AppAdapter(getFavoriteList(appList, appSystemList), context);
 
             fastScroller.setVisibility(View.VISIBLE);
             recyclerView.setAdapter(appAdapter);
@@ -305,23 +305,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         for (int i = 0; i < apps.size(); i++) {
             AppInfo appInfo = new AppInfo(apps.get(i), apks.get(i), versions.get(i), sources.get(i), data.get(i), icons.get(i), isSystem);
             res.add(appInfo);
-        }
-
-        return res;
-    }
-
-    private List<AppInfo> getFavoriteList(List<AppInfo> appList, List<AppInfo> appSystemList) {
-        List<AppInfo> res = new ArrayList<>();
-
-        for (AppInfo app : appList) {
-            if (UtilsApp.isAppFavorite(app.getAPK(), appPreferences.getFavoriteApps())) {
-                res.add(app);
-            }
-        }
-        for (AppInfo app : appSystemList) {
-            if (UtilsApp.isAppFavorite(app.getAPK(), appPreferences.getFavoriteApps())) {
-                res.add(app);
-            }
         }
 
         return res;

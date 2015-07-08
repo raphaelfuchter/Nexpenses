@@ -5,11 +5,11 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.javiersantos.mlmanager"
-        minSdkVersion 15
+        applicationId "com.rf17.nexpenses"
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 12
-        versionName "0.5.1"
+        versionName "0.0.1"
     }
     buildTypes {
         release {

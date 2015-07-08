@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.utils;
+package com.rf17.nexpenses.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.widgets.SnackBar;
-import com.javiersantos.mlmanager.R;
+import com.rf17.nexpenses.R;
 
 import java.io.File;
 

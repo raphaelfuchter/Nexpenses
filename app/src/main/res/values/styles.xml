@@ -1,9 +1,9 @@
 <resources>
-    <style name="MLManager" parent="MLManager.Base">
+    <style name="Nexpenses" parent="Nexpenses.Base">
 
     </style>
 
-    <style name="MLManager.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Nexpenses.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="windowActionBar">false</item>

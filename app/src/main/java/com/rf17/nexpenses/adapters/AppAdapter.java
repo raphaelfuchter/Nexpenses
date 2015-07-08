@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.adapters;
+package com.rf17.nexpenses.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,17 +15,13 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.gc.materialdesign.views.ButtonFlat;
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.activities.AppActivity;
-import com.javiersantos.mlmanager.AppInfo;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.activities.MainActivity;
-import com.javiersantos.mlmanager.async.ExtractFileInBackground;
-import com.javiersantos.mlmanager.utils.AppPreferences;
-import com.javiersantos.mlmanager.utils.UtilsApp;
-import com.javiersantos.mlmanager.utils.UtilsDialog;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.activities.AppActivity;
+import com.rf17.nexpenses.AppInfo;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.activities.MainActivity;
+import com.rf17.nexpenses.utils.AppPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +38,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     public AppAdapter(List<AppInfo> appList, Context context) {
         this.appList = appList;
         this.context = context;
-        this.appPreferences = MLManagerApplication.getAppPreferences();
+        this.appPreferences = NexpensesApplication.getAppPreferences();
     }
 
     @Override
@@ -67,30 +63,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     }
 
     private void setButtonEvents(AppViewHolder appViewHolder, final AppInfo appInfo) {
-        ButtonFlat appExtract = appViewHolder.vExtract;
-        ButtonFlat appShare = appViewHolder.vShare;
         CardView cardView = appViewHolder.vCard;
-
-        appExtract.setBackgroundColor(appPreferences.getPrimaryColorPref());
-        appShare.setBackgroundColor(appPreferences.getPrimaryColorPref());
-
-        appExtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                        , String.format(context.getResources().getString(R.string.dialog_saving), appInfo.getName())
-                        , context.getResources().getString(R.string.dialog_saving_description));
-                new ExtractFileInBackground(context, dialog, appInfo).execute();
-            }
-        });
-        appShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UtilsApp.copyFile(appInfo);
-                Intent shareIntent = UtilsApp.getShareIntent(UtilsApp.getOutputFilename(appInfo));
-                context.startActivity(Intent.createChooser(shareIntent, String.format(context.getResources().getString(R.string.send_to), appInfo.getName())));
-            }
-        });
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

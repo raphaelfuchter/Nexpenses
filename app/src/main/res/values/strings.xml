@@ -53,26 +53,26 @@
     <string name="dialog_cache_and_data_error_description">To delete data your phone must be rooted and root permission should be given. If you have denied access once. Go to SuperUser app to give access to MLManager.</string>
 
     <!-- Buttons -->
-    <string name="button_cancel">Cancel</string>
+    <string name="button_cancel">Cancelar</string>
     <string name="button_ok">OK</string>
     <string name="button_extract">Extract</string>
     <string name="button_share">Share APK</string>
-    <string name="button_undo">Undo</string>
+    <string name="button_undo">Voltar</string>
 
     <!-- Settings -->
     <string name="settings_delete_all">Delete all extracted APKs</string>
     <string name="settings_delete_all_description">Remove all the extracted APKs stored in the extraction folder</string>
     <string name="settings_custom_filename">Default filename for extracted APKs</string>
-    <string name="settings_sort_mode">Sort apps by</string>
-    <string name="settings_customizations">Customizations</string>
-    <string name="settings_primary_color">Primary color</string>
-    <string name="settings_primary_color_description">Set the primary color for the toolbar and navigation bar. Requires Android 5.0+</string>
-    <string name="settings_fab_color">Floating button color</string>
-    <string name="settings_fab_color_description">Set the color for the Floating Action Button (FAB)</string>
-    <string name="settings_navigation_black">Show navigation bar in black</string>
-    <string name="settings_navigation_black_description">Don\'t use a custom color for the navigation bar.</string>
-    <string name="settings_default_customization">Restore customizations</string>
-    <string name="settings_default_customization_description">Restore colors to the default values</string>
+    <string name="settings_sort_mode">Classificar Lançamentos por</string>
+    <string name="settings_customizations">Temas (Necessário Android 5.0+)</string>
+    <string name="settings_primary_color">Cor Primária</string>
+    <string name="settings_primary_color_description">A cor primária a ser usada. Padrão é Material Blue.</string>
+    <string name="settings_fab_color">Cor de destaque</string>
+    <string name="settings_fab_color_description">A cor de destaque a ser usada. Padrão é Material Pink.</string>
+    <string name="settings_navigation_black">Barra de navegação colorida</string>
+    <string name="settings_navigation_black_description">Colorir a barra de navegação do sistema com a cor primária.</string>
+    <string name="settings_default_customization">Restaurar padrão</string>
+    <string name="settings_default_customization_description">Restaurar as cores para os valores padrão.</string>
     <string name="settings_googleplay">Avaliar na Google Play</string>
     <string name="settings_googleplay_description">Você tem alguns segundos para avaliar este aplicativo? Queremos ouvir a sua opinião</string>
     <string name="settings_report_bugs">Reporte bugs ou requisite funções</string>
@@ -82,5 +82,5 @@
     <string name="about_description_1">Desenvolvedor</string>
 
     <!-- Toasts -->
-    <string name="tap_exit">Tap again to close the app</string>
+    <string name="tap_exit">Toque novamente para fechar o app</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager.utils;
+package com.rf17.nexpenses.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.javiersantos.mlmanager.MLManagerApplication;
-import com.javiersantos.mlmanager.activities.AboutActivity;
-import com.javiersantos.mlmanager.R;
-import com.javiersantos.mlmanager.activities.SettingsActivity;
-import com.javiersantos.mlmanager.adapters.AppAdapter;
+import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.activities.AboutActivity;
+import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.activities.SettingsActivity;
+import com.rf17.nexpenses.adapters.AppAdapter;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -42,7 +42,7 @@ public class UtilsUI {
 
     public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar, final AppAdapter appAdapter, final AppAdapter appSystemAdapter, final AppAdapter appFavoriteAdapter, final RecyclerView recyclerView) {
         int header;
-        appPreferences = MLManagerApplication.getAppPreferences();
+        appPreferences = NexpensesApplication.getAppPreferences();
 
         if (getDayOrNight() == 1) {
             header = R.drawable.header_day;

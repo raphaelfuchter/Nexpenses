@@ -1,4 +1,4 @@
-package com.javiersantos.mlmanager;
+package com.rf17.nexpenses;
 
 import android.graphics.drawable.Drawable;
 
