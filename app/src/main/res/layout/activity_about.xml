@@ -1,27 +1,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- Action Bar -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+    <!-- Action Bar -->
+
+    <!-- Card Superior -->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:id="@+id/relativeLayout1">
+
         <TextView
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:background="@color/primary" />
+
+        <!-- Icone do aplicativo -->
         <ImageView
             android:id="@+id/app_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/app_icon"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+        <!-- Icone do aplicativo -->
+
+        <!-- Nome do aplicativo -->
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
@@ -32,6 +43,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_below="@id/app_icon"
             android:layout_centerHorizontal="true" />
+        <!-- Nome do aplicativo -->
+
+        <!-- Descrição do aplicativo -->
         <TextView
             android:id="@+id/app_description"
             android:layout_width="300dp"
@@ -44,26 +58,40 @@
             android:gravity="center_horizontal"
             android:layout_below="@id/app_name"
             android:layout_centerHorizontal="true" />
+        <!-- Descrição do aplicativo -->
+
     </RelativeLayout>
+    <!-- Card Superior -->
+
+    <!-- Scroll -->
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/relativeLayout1">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
+            <!-- Card Desenvolvedor -->
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/about_1"
-                android:layout_margin="5dp"
+                android:id="@+id/about_developer"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                card_view:cardCornerRadius="2dp">
+                card_view:cardCornerRadius="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <!-- Foto Desenvolvedor -->
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,41 +101,121 @@
                     android:maxWidth="80dp"
                     android:maxHeight="80dp"
                     android:src="@drawable/about_raphael" />
+                <!-- Foto Desenvolvedor -->
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:orientation="vertical">
+
+                    <!-- Nome Desenvolvedor -->
                     <TextView
                         android:fontFamily="sans-serif-light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Raphael Fuchter"
                         android:textSize="22dp" />
+                    <!-- Nome Desenvolvedor -->
+
+                    <!-- Função Desenvolvedor -->
                     <TextView
                         android:fontFamily="sans-serif-thin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/about_description_1"
                         android:textSize="18dp" />
+                    <!-- Função Desenvolvedor -->
                 </LinearLayout>
+
             </android.support.v7.widget.CardView>
+            <!-- Card Desenvolvedor -->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/facebook__logo"
-                android:layout_below="@+id/about_1"
-                android:layout_alignLeft="@+id/about_1"
-                android:layout_alignStart="@+id/about_1"
-                android:id="@+id/imageView"
+            <LinearLayout
+                android:id="@+id/layout_icons"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@+id/about_developer"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
+                <!-- Twitter -->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    android:src="@drawable/twitter_logo"
+                    android:id="@+id/twitter_icon"
+                    android:layout_below="@+id/about_developer"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="45dp"/>
+                <!-- Twitter -->
+
+                <!-- GitHub -->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    android:src="@drawable/github_logo"
+                    android:id="@+id/github_icon"
+                    android:layout_below="@+id/about_developer"
+                    android:layout_toLeftOf="@+id/linkedin_icon"
+                    android:layout_toStartOf="@+id/linkedin_icon"
+                    android:longClickable="false"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+                <!-- GitHub -->
+
+                <!-- Facebook -->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    android:src="@drawable/facebook__logo"
+                    android:id="@+id/facebook_icon"
+                    android:layout_below="@+id/about_developer"
+                    android:layout_toRightOf="@+id/twitter_icon"
+                    android:layout_toEndOf="@+id/twitter_icon"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+                <!-- Facebook -->
+
+                <!-- LinkedIn -->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    android:src="@drawable/linkedin_logo"
+                    android:id="@+id/linkedin_icon"
+                    android:layout_below="@+id/about_developer"
+                    android:layout_alignRight="@+id/about_developer"
+                    android:layout_alignEnd="@+id/about_developer"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"/>
+                <!-- LinkedIn -->
+
+            </LinearLayout>
+
+            <!-- Card Google Play -->
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -117,9 +225,10 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 card_view:cardBackgroundColor="@color/card_blue"
                 card_view:cardCornerRadius="2dp"
-                android:layout_below="@+id/imageView"
-                android:layout_alignLeft="@+id/imageView"
-                android:layout_alignStart="@+id/imageView">
+                android:layout_below="@+id/layout_icons"
+                android:layout_marginTop="5dp">
+
+                <!-- Icone Google Play -->
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,6 +236,9 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_googleplay" />
+                <!-- Icone Google Play -->
+
+                <!-- Descricao Google Play -->
                 <TextView
                     android:fontFamily="sans-serif-light"
                     android:layout_width="wrap_content"
@@ -135,13 +247,17 @@
                     android:textColor="@android:color/white"
                     android:textSize="22dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"/>
-            </android.support.v7.widget.CardView>
+                    android:layout_marginLeft="20dp" />
+                <!-- Descricao Google Play -->
 
+            </android.support.v7.widget.CardView>
+            <!-- Card Google Play -->
+
+            <!-- Card Email -->
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/about_googleplus"
+                android:id="@+id/about_email"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -149,11 +265,13 @@
                 card_view:cardCornerRadius="2dp"
                 android:layout_below="@+id/about_googleplay"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="20dp"
                 android:layout_alignLeft="@+id/about_googleplay"
                 android:layout_alignStart="@+id/about_googleplay"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
+
+                <!-- Icone Email -->
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -161,7 +279,10 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/about_mail"
-                    android:maxWidth="55dp"/>
+                    android:maxWidth="55dp" />
+                <!-- Icone Email -->
+
+                <!-- Descricao Email -->
                 <TextView
                     android:fontFamily="sans-serif-light"
                     android:layout_width="wrap_content"
@@ -171,70 +292,14 @@
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="55dp"/>
+                    android:layout_marginLeft="55dp" />
+                <!-- Descricao Email -->
+
             </android.support.v7.widget.CardView>
+            <!-- Card Email -->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/github_logo"
-                android:id="@+id/imageView2"
-                android:layout_below="@+id/about_1"
-                android:layout_toLeftOf="@+id/imageView5"
-                android:layout_toStartOf="@+id/imageView5"
-                android:longClickable="false"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/twitter_logo"
-                android:id="@+id/imageView3"
-                android:layout_below="@+id/about_1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/facebook__logo"
-                android:id="@+id/imageView4"
-                android:layout_below="@+id/about_1"
-                android:layout_toRightOf="@+id/imageView3"
-                android:layout_toEndOf="@+id/imageView3"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/linkedin_logo"
-                android:id="@+id/imageView5"
-                android:layout_below="@+id/about_1"
-                android:layout_alignRight="@+id/about_1"
-                android:layout_alignEnd="@+id/about_1"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="30dp"/>
         </RelativeLayout>
     </ScrollView>
+    <!-- Scroll -->
 
 </RelativeLayout>

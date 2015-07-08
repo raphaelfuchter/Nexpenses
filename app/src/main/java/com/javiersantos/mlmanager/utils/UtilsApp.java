@@ -95,6 +95,13 @@ public class UtilsApp {
         return intent;
     }
 
+    public static Intent goToSite(String site) {
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://" + site));
+
+        return intent;
+    }
+
     public static String getAppVersionName(Context context) {
         String res = "0.0.0.0";
         try {

@@ -153,31 +153,6 @@ public class AppActivity extends AppCompatActivity {
             }
         });
 
-        if(UtilsRoot.isRooted()) {
-            cache.setVisibility(View.VISIBLE);
-            cache.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_cache_deleting)
-                            , getResources().getString(R.string.dialog_cache_deleting_description));
-                    new DeleteDataInBackground(context, dialog, appInfo.getData() + "/cache/**"
-                            , getResources().getString(R.string.dialog_cache_success_description, appInfo.getName())).execute();
-                }
-            });
-            clearData.setVisibility(View.VISIBLE);
-            clearData.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_clear_data_deleting)
-                            , getResources().getString(R.string.dialog_clear_data_deleting_description));
-                    new DeleteDataInBackground(context, dialog, appInfo.getData() + "/**"
-                            , getResources().getString(R.string.dialog_clear_data_success_description, appInfo.getName())).execute();
-                }
-            });
-        }
-
         // FAB
         fab.setIcon(R.drawable.ic_send_white);
         fab.setColorNormal(appPreferences.getFABColorPref());

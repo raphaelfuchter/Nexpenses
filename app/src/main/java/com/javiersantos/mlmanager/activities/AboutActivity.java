@@ -55,37 +55,32 @@ public class AboutActivity extends AppCompatActivity {
     private void setScreenElements() {
         TextView header = (TextView) findViewById(R.id.header);
         TextView appNameVersion = (TextView) findViewById(R.id.app_name);
-        CardView about_1 = (CardView) findViewById(R.id.about_1);
-        //CardView about_2 = (CardView) findViewById(R.id.about_2);
+        CardView about_developer = (CardView) findViewById(R.id.about_developer);
         CardView about_googleplay = (CardView) findViewById(R.id.about_googleplay);
-        CardView about_googleplus = (CardView) findViewById(R.id.about_googleplus);
+        CardView about_email = (CardView) findViewById(R.id.about_email);
 
         header.setBackgroundColor(appPreferences.getPrimaryColorPref());
+
         appNameVersion.setText(getResources().getString(R.string.app_name) + " v" + UtilsApp.getAppVersionName(getApplicationContext()));
-        about_1.setOnClickListener(new View.OnClickListener() {
+
+        about_developer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(UtilsApp.goToGooglePlus("+JavierSantos"));
+                startActivity(UtilsApp.goToSite("www.raphaelfuchter.com"));
             }
         });
-        /*
-        about_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(UtilsApp.goToGooglePlus("+javitoro95"));
-            }
-        });
-        */
+
         about_googleplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(UtilsApp.goToGooglePlay("com.javiersantos.mlmanager"));
+                startActivity(UtilsApp.goToGooglePlay("com.rf17.nexpenses"));
             }
         });
-        about_googleplus.setOnClickListener(new View.OnClickListener() {
+
+        about_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(UtilsApp.goToGooglePlus("communities/111960842500303983487"));
+                startActivity(UtilsApp.goToSite("rf17@oulook.com.br"));
             }
         });
     }
