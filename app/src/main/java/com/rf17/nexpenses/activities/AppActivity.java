@@ -19,12 +19,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
-import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 
 public class AppActivity extends AppCompatActivity {
@@ -90,7 +88,7 @@ public class AppActivity extends AppCompatActivity {
         CardView uninstall = (CardView) findViewById(R.id.uninstall_card);
         CardView cache = (CardView) findViewById(R.id.cache_card);
         CardView clearData = (CardView) findViewById(R.id.clear_data_card);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //icon.setImageDrawable(appInfo.getIcon());
         //name.setText(appInfo.getName());
@@ -176,6 +174,7 @@ public class AppActivity extends AppCompatActivity {
     }
 
     private void getInitialConfiguration() {
+        /*
         String appName = getIntent().getStringExtra("app_name");
         String appApk = getIntent().getStringExtra("app_apk");
         String appVersion = getIntent().getStringExtra("app_version");
@@ -183,8 +182,8 @@ public class AppActivity extends AppCompatActivity {
         String appData = getIntent().getStringExtra("app_data");
         Bitmap bitmap = getIntent().getParcelableExtra("app_icon");
         Drawable appIcon = new BitmapDrawable(getResources(), bitmap);
-        Boolean appIsSystem = getIntent().getExtras().getBoolean("app_isSystem");
-
+        //Boolean appIsSystem = getIntent().getExtras().getBoolean("app_isSystem");
+*/
         //appInfo = new AppInfo(appName, appApk, appVersion, appSource, appData, appIcon, appIsSystem);
 
     }

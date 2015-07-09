@@ -2,6 +2,7 @@ package com.rf17.nexpenses.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.adapters.AppAdapter;
+import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.UtilsUI;
@@ -35,7 +37,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
@@ -99,6 +103,38 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         progressWheel.setVisibility(View.VISIBLE);
         new getLancamentos().execute();
 
+        //Botao nova despesa
+        findViewById(R.id.menu_item_despesa).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    context.startActivity(new Intent(context, AppActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    //Intent intent = new Intent(MainActivity.this, AppActivity.class);
+                    //intent.putExtra("tipo", "D");//Despesa
+                    //startActivity(intent);
+                    //finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //Botao nova receita
+        findViewById(R.id.menu_item_receita).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    context.startActivity(new Intent(context, AppActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    //Intent intent = new Intent(MainActivity.this, AppActivity.class);
+                    //intent.putExtra("tipo", "R");//Receita
+                    //startActivity(intent);
+                    //finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private void setInitialConfiguration() {
@@ -123,16 +159,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         private Integer actualApps;
 
         public getLancamentos() {
-            actualApps = 0;
+            try {
+                actualApps = 0;
 
-            lancamentos = new ArrayList<>();
-
-            appListName = new ArrayList<>();
-            appListAPK = new ArrayList<>();
-            appListVersion = new ArrayList<>();
-            appListSource = new ArrayList<>();
-            appListData = new ArrayList<>();
-            appListIcon = new ArrayList<>();
+                LancamentoDao lancamentoDao = new LancamentoDao(context);
+                lancamentoDao.open();
+                lancamentos = lancamentoDao.ListAll(new Date());
+                lancamentoDao.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -233,22 +269,28 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            try {
+                super.onPostExecute(aVoid);
 
-            lancamentos = createList(appListName, appListAPK, appListVersion, appListSource, appListData, appListIcon, false);
-            appAdapter = new AppAdapter(lancamentos, context);
-            //appSystemList = createList(appSystemListName, appSystemListAPK, appSystemListVersion, appSystemListSource, appSystemListData, appSystemListIcon, true);
-            //appSystemAdapter = new AppAdapter(appSystemList, context);
-            //appFavoriteAdapter = new AppAdapter(getFavoriteList(appList, appSystemList), context);
 
-            fastScroller.setVisibility(View.VISIBLE);
-            recyclerView.setAdapter(appAdapter);
-            pullToRefreshView.setEnabled(true);
-            progressWheel.setVisibility(View.GONE);
-            //searchItem.setVisible(true);
 
-            setPullToRefreshView(pullToRefreshView);
-            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar, appAdapter, recyclerView);
+                //lancamentos = createList(appListName, appListAPK, appListVersion, appListSource, appListData, appListIcon, false);
+                appAdapter = new AppAdapter(lancamentos, context);
+                //appSystemList = createList(appSystemListName, appSystemListAPK, appSystemListVersion, appSystemListSource, appSystemListData, appSystemListIcon, true);
+                //appSystemAdapter = new AppAdapter(appSystemList, context);
+                //appFavoriteAdapter = new AppAdapter(getFavoriteList(appList, appSystemList), context);
+
+                //fastScroller.setVisibility(View.GONE);
+                recyclerView.setAdapter(appAdapter);
+                pullToRefreshView.setEnabled(true);
+                progressWheel.setVisibility(View.GONE);
+                //searchItem.setVisible(true);
+
+                setPullToRefreshView(pullToRefreshView);
+                drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar, appAdapter, recyclerView);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     }
@@ -271,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
     }
 
+    /*
     private List<Lancamento> createList(List<String> apps, List<String> apks, List<String> versions, List<String> sources, List<String> data, List<Drawable> icons, Boolean isSystem) {
         List<Lancamento> res = new ArrayList<>();
         for (int i = 0; i < apps.size(); i++) {
@@ -281,6 +324,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         return res;
     }
+    */
 
     @Override
     public boolean onQueryTextChange(String search) {
