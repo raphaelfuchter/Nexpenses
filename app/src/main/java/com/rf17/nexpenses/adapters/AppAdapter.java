@@ -15,12 +15,11 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gc.materialdesign.views.ButtonFlat;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.activities.AppActivity;
-import com.rf17.nexpenses.AppInfo;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
+import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
 
 import java.util.ArrayList;
@@ -31,38 +30,40 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     private AppPreferences appPreferences;
 
     // AppAdapter variables
-    private List<AppInfo> appList;
-    private List<AppInfo> appListSearch;
+    private List<Lancamento> lancamentos;
+    private List<Lancamento> lancamentosSearch;
     private Context context;
 
-    public AppAdapter(List<AppInfo> appList, Context context) {
-        this.appList = appList;
+    public AppAdapter(List<Lancamento> lancamentos, Context context) {
+        this.lancamentos = lancamentos;
         this.context = context;
         this.appPreferences = NexpensesApplication.getAppPreferences();
     }
 
     @Override
     public int getItemCount() {
-        return appList.size();
+        return lancamentos.size();
     }
 
     public void clear() {
-        appList.clear();
+        lancamentos.clear();
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
-        AppInfo appInfo = appList.get(i);
-        appViewHolder.vName.setText(appInfo.getName());
-        appViewHolder.vApk.setText(appInfo.getAPK());
-        appViewHolder.vIcon.setImageDrawable(appInfo.getIcon());
+        Lancamento lancamento = lancamentos.get(i);
+        appViewHolder.valor.setText(lancamento.getValor().toString());
+        appViewHolder.descricao.setText(lancamento.getDescricao());
+        appViewHolder.data.setText(lancamento.getData().toString());
+        //appViewHolder.vIcon.setImageDrawable(appInfo.getIcon()); FIXME
 
-        setButtonEvents(appViewHolder, appInfo);
+
+        setButtonEvents(appViewHolder, lancamento);
 
     }
 
-    private void setButtonEvents(AppViewHolder appViewHolder, final AppInfo appInfo) {
+    private void setButtonEvents(AppViewHolder appViewHolder, final Lancamento lancamento) {
         CardView cardView = appViewHolder.vCard;
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -71,14 +72,14 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
                 Activity activity = (Activity) context;
 
                 Intent intent = new Intent(context, AppActivity.class);
-                intent.putExtra("app_name", appInfo.getName());
-                intent.putExtra("app_apk", appInfo.getAPK());
-                intent.putExtra("app_version", appInfo.getVersion());
-                intent.putExtra("app_source", appInfo.getSource());
-                intent.putExtra("app_data", appInfo.getData());
-                Bitmap bitmap = ((BitmapDrawable) appInfo.getIcon()).getBitmap();
-                intent.putExtra("app_icon", bitmap);
-                intent.putExtra("app_isSystem", appInfo.isSystem());
+                //intent.putExtra("id", lancamento.getId_lancamento());
+                //intent.putExtra("app_apk", appInfo.getAPK());
+                //intent.putExtra("app_version", appInfo.getVersion());
+                //intent.putExtra("app_source", appInfo.getSource());
+                //intent.putExtra("app_data", appInfo.getData());
+                //Bitmap bitmap = ((BitmapDrawable) appInfo.getIcon()).getBitmap();
+                //intent.putExtra("app_icon", bitmap);
+                //intent.putExtra("app_isSystem", appInfo.isSystem());
 
                 context.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
@@ -92,15 +93,15 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 final FilterResults oReturn = new FilterResults();
-                final List<AppInfo> results = new ArrayList<>();
-                if (appListSearch == null) {
-                    appListSearch = appList;
+                final List<Lancamento> results = new ArrayList<>();
+                if (lancamentosSearch == null) {
+                    lancamentosSearch = lancamentos;
                 }
                 if (charSequence != null) {
-                    if (appListSearch != null && appListSearch.size() > 0) {
-                        for (final AppInfo appInfo : appListSearch) {
-                            if (appInfo.getName().toLowerCase().contains(charSequence.toString())) {
-                                results.add(appInfo);
+                    if (lancamentosSearch != null && lancamentosSearch.size() > 0) {
+                        for (final Lancamento lancamento : lancamentosSearch) {
+                            if (lancamento.getDescricao().toLowerCase().contains(charSequence.toString())) {
+                                results.add(lancamento);
                             }
                         }
                     }
@@ -117,7 +118,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
                 } else {
                     MainActivity.setResultsMessage(true);
                 }
-                appList = (ArrayList<AppInfo>) filterResults.values;
+                lancamentos = (ArrayList<Lancamento>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
@@ -130,20 +131,18 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     }
 
     public static class AppViewHolder extends RecyclerView.ViewHolder {
-        protected TextView vName;
-        protected TextView vApk;
+        protected TextView valor;
+        protected TextView descricao;
+        protected TextView data;
         protected ImageView vIcon;
-        protected ButtonFlat vExtract;
-        protected ButtonFlat vShare;
         protected CardView vCard;
 
         public AppViewHolder(View v) {
             super(v);
-            vName = (TextView) v.findViewById(R.id.txtName);
-            vApk = (TextView) v.findViewById(R.id.txtApk);
+            valor = (TextView) v.findViewById(R.id.txtValor);
+            descricao = (TextView) v.findViewById(R.id.txtDescricao);
+            data = (TextView) v.findViewById(R.id.txt_data);
             vIcon = (ImageView) v.findViewById(R.id.imgIcon);
-            vExtract = (ButtonFlat) v.findViewById(R.id.btnExtract);
-            vShare = (ButtonFlat) v.findViewById(R.id.btnShare);
             vCard = (CardView) v.findViewById(R.id.app_card);
 
         }

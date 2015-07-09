@@ -20,21 +20,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.rf17.nexpenses.AppInfo;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
-
-import java.util.Set;
 
 public class AppActivity extends AppCompatActivity {
     // Load Settings
     private AppPreferences appPreferences;
 
     // General variables
-    private AppInfo appInfo;
+    private Lancamento lancamento;
 
     // Configuration variables
     private int UNINSTALL_REQUEST_CODE = 1;
@@ -94,15 +92,16 @@ public class AppActivity extends AppCompatActivity {
         CardView clearData = (CardView) findViewById(R.id.clear_data_card);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        icon.setImageDrawable(appInfo.getIcon());
-        name.setText(appInfo.getName());
-        apk.setText(appInfo.getAPK());
-        version.setText(appInfo.getVersion());
+        //icon.setImageDrawable(appInfo.getIcon());
+        //name.setText(appInfo.getName());
+        //apk.setText(appInfo.getAPK());
+        //version.setText(appInfo.getVersion());
 
         // Header
         header.setBackgroundColor(appPreferences.getPrimaryColorPref());
 
         // CardView
+        /*
         if (appInfo.isSystem()) {
             icon_googleplay.setVisibility(View.GONE);
             start.setVisibility(View.GONE);
@@ -159,7 +158,7 @@ public class AppActivity extends AppCompatActivity {
                 //startActivity(Intent.createChooser(shareIntent, String.format(getResources().getString(R.string.send_to), appInfo.getName())));
             }
         });
-
+        */
     }
 
     @Override
@@ -186,7 +185,7 @@ public class AppActivity extends AppCompatActivity {
         Drawable appIcon = new BitmapDrawable(getResources(), bitmap);
         Boolean appIsSystem = getIntent().getExtras().getBoolean("app_isSystem");
 
-        appInfo = new AppInfo(appName, appApk, appVersion, appSource, appData, appIcon, appIsSystem);
+        //appInfo = new AppInfo(appName, appApk, appVersion, appSource, appData, appIcon, appIsSystem);
 
     }
 

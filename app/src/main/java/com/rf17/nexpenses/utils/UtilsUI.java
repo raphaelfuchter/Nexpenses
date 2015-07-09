@@ -40,7 +40,7 @@ public class UtilsUI {
         return Color.argb(a, Math.max((int) (r * factor), 0), Math.max((int) (g * factor), 0), Math.max((int) (b * factor), 0));
     }
 
-    public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar, final AppAdapter appAdapter, final AppAdapter appSystemAdapter, final AppAdapter appFavoriteAdapter, final RecyclerView recyclerView) {
+    public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar, final AppAdapter appAdapter, final RecyclerView recyclerView) {
         int header;
         appPreferences = NexpensesApplication.getAppPreferences();
 
@@ -78,10 +78,10 @@ public class UtilsUI {
                                 recyclerView.setAdapter(appAdapter);
                                 break;
                             case 1:
-                                recyclerView.setAdapter(appSystemAdapter);
+                                //recyclerView.setAdapter(appSystemAdapter);
                                 break;
                             case 3:
-                                recyclerView.setAdapter(appFavoriteAdapter);
+                                //recyclerView.setAdapter(appFavoriteAdapter);
                                 break;
                             case 5:
                                 Log.v("", "Apoie o Desenvolvimento");
@@ -105,7 +105,7 @@ public class UtilsUI {
     public static int getDayOrNight() {
         int actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
-        if (actualHour >= 8 && actualHour < 19) {
+        if (actualHour >= 6 && actualHour < 18) {
             return 1;
         } else {
             return 0;
