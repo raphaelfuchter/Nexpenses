@@ -33,9 +33,9 @@ public class AppActivity extends AppCompatActivity {
     private Lancamento lancamento;
 
     // Configuration variables
-    private int UNINSTALL_REQUEST_CODE = 1;
+    //private int UNINSTALL_REQUEST_CODE = 1;
     private Context context;
-    private MenuItem item_favorite;
+    //private MenuItem item_favorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +78,16 @@ public class AppActivity extends AppCompatActivity {
     private void setScreenElements() {
         TextView header = (TextView) findViewById(R.id.header);
         ImageView icon = (ImageView) findViewById(R.id.app_icon);
-        ImageView icon_googleplay = (ImageView) findViewById(R.id.app_googleplay);
+        //ImageView icon_googleplay = (ImageView) findViewById(R.id.app_googleplay);
         TextView name = (TextView) findViewById(R.id.app_name);
-        TextView version = (TextView) findViewById(R.id.app_version);
-        TextView apk = (TextView) findViewById(R.id.app_apk);
+        //TextView version = (TextView) findViewById(R.id.app_version);
+        //TextView apk = (TextView) findViewById(R.id.app_apk);
         CardView googleplay = (CardView) findViewById(R.id.id_card);
         CardView start = (CardView) findViewById(R.id.start_card);
-        CardView extract = (CardView) findViewById(R.id.extract_card);
-        CardView uninstall = (CardView) findViewById(R.id.uninstall_card);
-        CardView cache = (CardView) findViewById(R.id.cache_card);
-        CardView clearData = (CardView) findViewById(R.id.clear_data_card);
+       // CardView extract = (CardView) findViewById(R.id.extract_card);
+        //CardView uninstall = (CardView) findViewById(R.id.uninstall_card);
+        //CardView cache = (CardView) findViewById(R.id.cache_card);
+        //CardView clearData = (CardView) findViewById(R.id.clear_data_card);
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //icon.setImageDrawable(appInfo.getIcon());
@@ -162,6 +162,8 @@ public class AppActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        /*
         if (requestCode == UNINSTALL_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Log.i("App", "OK");
@@ -171,6 +173,7 @@ public class AppActivity extends AppCompatActivity {
                 Log.i("App", "CANCEL");
             }
         }
+        */
     }
 
     private void getInitialConfiguration() {

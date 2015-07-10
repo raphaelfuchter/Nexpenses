@@ -1,23 +1,33 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- Toolbar -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+    <!-- Toolbar -->
+
+    <!-- Barra superior -->
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="115dp"
         android:orientation="vertical"
         android:layout_below="@id/toolbar"
         android:id="@+id/relativeLayout1">
+
         <TextView
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:background="@color/primary" />
+
+        <!-- Icone -->
         <ImageView
-            android:id="@+id/app_icon"
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_android"
@@ -26,233 +36,177 @@
             android:maxHeight="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+        <!-- Icone -->
+
+        <!-- Descricao icone -->
         <TextView
-            android:id="@+id/app_name"
+            android:id="@+id/icon_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="App"
+            android:text="icone_descricao"
             android:textSize="22dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
-            android:layout_below="@id/app_icon"
+            android:layout_below="@id/icon"
             android:layout_centerHorizontal="true" />
-        <TextView
-            android:id="@+id/app_version"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:gravity="center_horizontal"
-            android:layout_below="@id/app_name"
-            android:layout_centerHorizontal="true" />
+        <!-- Descricao icone -->
+
     </RelativeLayout>
+    <!-- Barra superior -->
+
+    <!-- Card Valor -->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="135dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:id="@+id/relativeLayout2">
+
+        <!-- Card Interior -->
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/id_card"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="60dp"
             card_view:cardCornerRadius="2dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="5dp">
-            <ImageView
-                android:id="@+id/app_googleplay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_googleplay" />
-            <TextView
-                android:id="@+id/app_apk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="com.javiersantos"
-                android:fontFamily="sans-serif-thin"
-                android:textColor="@color/text_primary"
-                android:gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
 
+            <!-- Valor -->
+            <EditText
+                android:id="@+id/editText_valor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView_valor"
+                android:digits="1234567890.,"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Valor"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textStyle="bold"/>
+            <!-- Valor -->
+
+        </android.support.v7.widget.CardView>
+        <!-- Card Interior -->
+
+    </RelativeLayout>
+    <!-- Card Valor -->
+
+    <!-- Scroll informações -->
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/relativeLayout2">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
+
+            <!-- Card Data -->
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/start_card"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="200dp"
                 card_view:cardCornerRadius="2dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_margin="5dp">
+
+                <!-- Title Data -->
                 <TextView
-                    android:fontFamily="sans-serif-thin"
+                    android:id="@+id/textView_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/editText_valor"
+                    android:text="Data"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/dialog_run"
-                    android:textColor="@android:color/black"
-                    android:textSize="25dp" />
-                <TextView
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="50dp"
-                    android:text="@string/dialog_run_description"
-                    android:textColor="@android:color/black"
-                    android:textSize="14dp" />
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_below="@id/start_card"
-                android:id="@+id/extract_card"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                card_view:cardCornerRadius="2dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp">
-                <TextView
-                    android:fontFamily="sans-serif-thin"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <!-- Title Data -->
+
+                <!-- Data -->
+                <EditText
+                    android:id="@+id/editText_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/dialog_extract"
-                    android:textColor="@android:color/black"
-                    android:textSize="25dp" />
+                    android:layout_alignRight="@+id/editText_valor"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textView_data"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:inputType="date"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <!-- Data -->
+
+                <!-- Title Descricao -->
                 <TextView
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="50dp"
-                    android:text="@string/dialog_extract_description"
-                    android:textColor="@android:color/black"
-                    android:textSize="14dp" />
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_below="@id/extract_card"
-                android:id="@+id/uninstall_card"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                card_view:cardCornerRadius="2dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp">
-                <TextView
-                    android:fontFamily="sans-serif-thin"
+                    android:id="@+id/textView_descricao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/dialog_uninstall"
-                    android:textColor="@android:color/black"
-                    android:textSize="25dp" />
-                <TextView
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="50dp"
-                    android:text="@string/dialog_uninstall_description"
-                    android:textColor="@android:color/black"
-                    android:textSize="14dp" />
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_below="@id/uninstall_card"
-                android:id="@+id/cache_card"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                card_view:cardCornerRadius="2dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp"
-                android:visibility="gone">
-                <TextView
-                    android:fontFamily="sans-serif-thin"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/editText_data"
+                    android:text="Descrição"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <!-- Title Descricao -->
+
+                <!-- Descricao -->
+                <EditText
+                    android:id="@+id/editText_descricao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/dialog_cache"
-                    android:textColor="@android:color/black"
-                    android:textSize="25dp" />
-                <TextView
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="50dp"
-                    android:textColor="@android:color/black"
-                    android:text="@string/dialog_cache_description"
-                    android:textSize="14dp" />
+                    android:layout_alignRight="@+id/editText_data"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textView_descricao"
+                    android:inputType="textMultiLine"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lines="3"
+                    android:maxLines="3"/>
+                <!-- Descricao -->
+
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_below="@id/cache_card"
-                android:id="@+id/clear_data_card"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                card_view:cardCornerRadius="2dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp"
-                android:visibility="gone">
-                <TextView
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/dialog_clear_data"
-                    android:textColor="@android:color/black"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/clear_data_description"
-                    android:fontFamily="sans-serif-thin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="50dp"
-                    android:textColor="@android:color/black"
-                    android:text="@string/dialog_clear_data_description"
-                    android:textSize="14dp" />
-            </android.support.v7.widget.CardView>
+            <!-- Card Data -->
+
         </RelativeLayout>
     </ScrollView>
+    <!-- Scroll informações -->
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--
-        <include
-            android:id="@+id/fab"
-            layout="@layout/fab_single" />
-            -->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/accent"
+            app:fab_colorPressed="@color/accent"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"/>
+
     </FrameLayout>
 
 </RelativeLayout>
