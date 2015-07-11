@@ -31,7 +31,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.rf17.nexpenses.activities.AppActivity">
+            android:name=".activities.LancamentoActivity">
         </activity>
         <activity
             android:name="com.rf17.nexpenses.activities.SettingsActivity">

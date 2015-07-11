@@ -33,13 +33,8 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
@@ -103,16 +98,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         progressWheel.setVisibility(View.VISIBLE);
         new getLancamentos().execute();
 
+
+        context.startActivity(new Intent(context, LancamentoActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
         //Botao nova despesa
-        findViewById(R.id.menu_item_despesa).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_despesa).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    context.startActivity(new Intent(context, AppActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    //Intent intent = new Intent(MainActivity.this, AppActivity.class);
-                    //intent.putExtra("tipo", "D");//Despesa
-                    //startActivity(intent);
-                    //finish();
+                    Intent intent = new Intent(context, LancamentoActivity.class);
+                    intent.putExtra("tipo", "D");//Despesa
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -120,14 +116,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
 
         //Botao nova receita
-        findViewById(R.id.menu_item_receita).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_receita).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    context.startActivity(new Intent(context, AppActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    //Intent intent = new Intent(MainActivity.this, AppActivity.class);
-                    //intent.putExtra("tipo", "R");//Receita
-                    //startActivity(intent);
+                    Intent intent = new Intent(context, LancamentoActivity.class);
+                    intent.putExtra("tipo", "R");//Receita
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     //finish();
                 } catch (Exception e) {
                     e.printStackTrace();

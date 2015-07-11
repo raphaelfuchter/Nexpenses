@@ -3,8 +3,6 @@ package com.rf17.nexpenses.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rf17.nexpenses.NexpensesApplication;
-import com.rf17.nexpenses.activities.AppActivity;
+import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.model.Lancamento;
@@ -71,7 +69,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
             public void onClick(View view) {
                 Activity activity = (Activity) context;
 
-                Intent intent = new Intent(context, AppActivity.class);
+                Intent intent = new Intent(context, LancamentoActivity.class);
                 //intent.putExtra("id", lancamento.getId_lancamento());
                 //intent.putExtra("app_apk", appInfo.getAPK());
                 //intent.putExtra("app_version", appInfo.getVersion());

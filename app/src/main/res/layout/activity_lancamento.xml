@@ -43,7 +43,7 @@
             android:id="@+id/icon_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="icone_descricao"
+            android:text="descricao"
             android:textSize="22dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
@@ -195,17 +195,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
-            app:fab_size="mini"
-            app:fab_colorNormal="@color/accent"
-            app:fab_colorPressed="@color/accent"
-            android:layout_gravity="right|bottom"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"/>
+        <include
+            android:id="@+id/fab"
+            layout="@layout/fab_single" />
 
     </FrameLayout>
 
