@@ -51,7 +51,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     @Override
     public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
         Lancamento lancamento = lancamentos.get(i);
-        appViewHolder.valor.setText(lancamento.getValor().toString());
+        appViewHolder.valor.setText(lancamento.getValor()+"");
         appViewHolder.descricao.setText(lancamento.getDescricao());
         appViewHolder.data.setText(lancamento.getData().toString());
         //appViewHolder.vIcon.setImageDrawable(appInfo.getIcon()); FIXME

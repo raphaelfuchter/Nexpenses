@@ -1,5 +1,6 @@
 package com.rf17.nexpenses.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 
 public class AboutActivity extends AppCompatActivity {
-    // Load Settings
+
     AppPreferences appPreferences;
 
     @Override
@@ -27,13 +28,14 @@ public class AboutActivity extends AppCompatActivity {
 
         setInitialConfiguration();
         setScreenElements();
-
     }
 
     private void setInitialConfiguration() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.action_about);
+        if (getSupportActionBar() != null ) {
+            getSupportActionBar().setTitle(R.string.action_about);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,15 +43,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
-            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (!appPreferences.getNavigationColorPref()) {
-                getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            }
-        }
-
+        UtilsApp.setAppColor(getWindow(), toolbar);
     }
 
     private void setScreenElements() {
@@ -87,7 +81,8 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        startActivity(new Intent(AboutActivity.this, MainActivity.class));
+        finish();
         overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
     }
 

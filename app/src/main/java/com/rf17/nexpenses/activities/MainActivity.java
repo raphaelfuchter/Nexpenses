@@ -28,6 +28,7 @@ import com.rf17.nexpenses.adapters.AppAdapter;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 import com.mikepenz.materialdrawer.Drawer;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -75,7 +76,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         this.appPreferences = NexpensesApplication.getAppPreferences();
         this.context = this;
 
-        setInitialConfiguration();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.app_name);
+        }
+
+        UtilsApp.setAppColor(getWindow(), toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.appList);
         pullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
@@ -98,9 +105,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         progressWheel.setVisibility(View.VISIBLE);
         new getLancamentos().execute();
 
-
-        context.startActivity(new Intent(context, LancamentoActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
         //Botao nova despesa
         findViewById(R.id.fab_despesa).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     Intent intent = new Intent(context, LancamentoActivity.class);
                     intent.putExtra("tipo", "D");//Despesa
                     context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -123,30 +128,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     Intent intent = new Intent(context, LancamentoActivity.class);
                     intent.putExtra("tipo", "R");//Receita
                     context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    //finish();
+                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-    }
-
-    private void setInitialConfiguration() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.app_name);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
-            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (!appPreferences.getNavigationColorPref()) {
-                getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            }
-        }
     }
 
     class getLancamentos extends AsyncTask<Void, String, Void> {

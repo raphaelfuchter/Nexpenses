@@ -1,9 +1,17 @@
 package com.rf17.nexpenses.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v7.widget.Toolbar;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.rf17.nexpenses.NexpensesApplication;
 
 import java.io.File;
 
@@ -56,6 +64,30 @@ public class UtilsApp {
         }
 
         return res;
+    }
+
+    /**
+     * Mostra Toast/Mensagem de erro na tela
+     *
+     * @param activity
+     * 			- Activity/tela que sera utilizado o Toast
+     * @param message
+     * 			- Erro/mensagem/aviso
+     */
+    public static void showToast(Activity activity, String message){
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void setAppColor(Window window, Toolbar toolbar){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            appPreferences = NexpensesApplication.getAppPreferences();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
+            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
+            if (appPreferences.getNavigationColorPref()) {
+                window.setNavigationBarColor(appPreferences.getPrimaryColorPref());
+            }
+        }
     }
 
 }

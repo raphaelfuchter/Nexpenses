@@ -7,7 +7,7 @@ public class Lancamento {
     private Integer id_lancamento;
     private String tipo; // R-Receita / C-Despesa
     //private Categoria categoria;
-    private Double valor;
+    private double valor;
     private Date data;
     private Date data_atual;
     private String descricao;
@@ -34,11 +34,11 @@ public class Lancamento {
         this.tipo = tipo;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 

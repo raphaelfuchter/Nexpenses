@@ -17,4 +17,8 @@
     <color name="card_green">#8CC24A</color>
     <color name="card_red">#DE6262</color>
     <color name="card_orange">#FF7043</color>
+
+    <color name="mdtp_accent_color">@color/primary</color><!-- Calendar Primary -->
+    <color name="mdtp_accent_color_dark">@color/primary_dark</color><!-- Calendar Dark -->
+
 </resources>

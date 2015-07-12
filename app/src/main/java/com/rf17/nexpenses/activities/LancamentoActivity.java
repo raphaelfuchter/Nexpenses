@@ -1,6 +1,8 @@
 package com.rf17.nexpenses.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.StringUtils;
+import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -29,183 +32,123 @@ import java.util.Locale;
 
 public class LancamentoActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    // Load Settings
     private AppPreferences appPreferences;
 
-    // General variables
     private Lancamento lancamento;
 
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-    private ImageView icone;
-    private TextView descricao;
-
-    private EditText editText_valor;
-    private EditText editText_data;
-    private EditText editText_descricao;
-    private TextView header;
-
+    private ImageView icon;
+    private EditText editText_valor, editText_data, editText_descricao;
+    private TextView header, icon_description;
     private FloatingActionButton fab_salvar;
-
-
-
-    // Configuration variables
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lancamento);
-        this.context = this;
-        this.appPreferences = NexpensesApplication.getAppPreferences();
-
-        getInitialConfiguration();
-        setInitialConfiguration();
-        setScreenElements();
-
-    }
-
-    private void setInitialConfiguration() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null ) {
-            getSupportActionBar().setTitle("");
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        //Voltar
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
-            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (appPreferences.getNavigationColorPref()) {
-                getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            }
-        }
-    }
-
-    private void setScreenElements() {
-
-        icone = (ImageView) findViewById(R.id.icon);
-        descricao = (TextView) findViewById(R.id.icon_description);
-
-        editText_valor = (EditText) findViewById(R.id.editText_valor);
-        editText_data = (EditText) findViewById(R.id.editText_data);
-        editText_descricao = (EditText) findViewById(R.id.editText_descricao);
-        header = (TextView) findViewById(R.id.header);
-
-        fab_salvar = (FloatingActionButton) findViewById(R.id.fab);
-
-        //icone.setImageDrawable(appInfo.getIcon());
-        descricao.setText("Despesa");
-
-        // Header
-        header.setBackgroundColor(appPreferences.getPrimaryColorPref());
-
-        editText_data.setOnClickListener(new View.OnClickListener() {//Abre datePicker
-            @Override
-            public void onClick(View v) {
-                try {
-                    Calendar now = Calendar.getInstance();
-                    DatePickerDialog dpd = DatePickerDialog.newInstance(
-                            LancamentoActivity.this,
-                            now.get(Calendar.YEAR),
-                            now.get(Calendar.MONTH),
-                            now.get(Calendar.DAY_OF_MONTH)
-                    );
-                    dpd.show(getFragmentManager(), "Datepickerdialog");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        // FAB Salvar
-        //fab.setIcon(R.drawable.ic_send_white);
-        fab_salvar.setColorNormal(appPreferences.getAccentColorPref());
-        fab_salvar.setColorPressed(UtilsUI.darker(appPreferences.getAccentColorPref(), 0.8));
-        fab_salvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                salvar(editText_valor.getText().toString(), editText_data.getText().toString(), editText_descricao.getText().toString());
-
-                onBackPressed();
-            }
-        });
-
-    }
-
-
-    private void getInitialConfiguration() {
-        String id = getIntent().getStringExtra("id");
-        if (id != null) {
-            //Busca no bd e preeenche as informacoes
-        }
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_app, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //item_favorite = menu.findItem(R.id.action_favorite);
-        //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home:
-                finish();
-                return true;
-            //case R.id.action_favorite:
-                //if (UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites)) {
-                //    appFavorites.remove(appInfo.getAPK());
-                //    appPreferences.setFavoriteApps(appFavorites);
-                //} else {
-                //    appFavorites.add(appInfo.getAPK());
-                //    appPreferences.setFavoriteApps(appFavorites);
-                //}
-                //UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appFavorites));
-             //   return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    // ## DataPicker ##
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        editText_data.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
-    }
-    // ## DataPicker ##
-
-    private void salvar(String valor, String data, String descricao){
         try{
-            lancamento.setValor(StringUtils.formataVerificaValor(valor));
-            lancamento.setData(sdf.parse(data));
-            lancamento.setDescricao(descricao);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_lancamento);
+            this.appPreferences = NexpensesApplication.getAppPreferences();
+
+            header = (TextView) findViewById(R.id.header);
+            icon = (ImageView) findViewById(R.id.icon);
+            icon_description = (TextView) findViewById(R.id.icon_description);
+            editText_valor = (EditText) findViewById(R.id.editText_valor);
+            editText_data = (EditText) findViewById(R.id.editText_data);
+            editText_descricao = (EditText) findViewById(R.id.editText_descricao);
+            fab_salvar = (FloatingActionButton) findViewById(R.id.fab);
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            if (getSupportActionBar() != null ) {
+                getSupportActionBar().setTitle("");
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+
+            UtilsApp.setAppColor(getWindow(), toolbar);
+            header.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
+
+            String id = getIntent().getStringExtra("id");
+            if (id != null) {//Editar
+                lancamentoDao.open();
+                lancamento = lancamentoDao.getById(Integer.parseInt(id));//Busca lancamento no banco de dados
+                lancamentoDao.close();
+            } else {//Novo
+                lancamento = new Lancamento();
+                lancamento.setTipo(getIntent().getStringExtra("tipo"));
+            }
+
+            Drawable despesa = getResources().getDrawable(R.drawable.despesa_pink);
+            Drawable receita = getResources().getDrawable(R.drawable.receita_pink);
+
+            icon.setImageDrawable(lancamento.getTipo().equals("R") ? receita : despesa);
+            icon_description.setText(lancamento.getTipo().equals("R") ? "Receita" : "Despesa");
+
+            //Voltar
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+
+
+            //DatePicker
+            editText_data.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Calendar now = Calendar.getInstance();
+                        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                                LancamentoActivity.this,
+                                now.get(Calendar.YEAR),
+                                now.get(Calendar.MONTH),
+                                now.get(Calendar.DAY_OF_MONTH)
+                        );
+                        dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            //Salvar
+            fab_salvar.setColorNormal(appPreferences.getAccentColorPref());
+            fab_salvar.setColorPressed(UtilsUI.darker(appPreferences.getAccentColorPref(), 0.8));
+            fab_salvar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    salvar();
+                    onBackPressed();
+                }
+            });
+
+            lancamentoToForm(lancamento);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            UtilsApp.showToast(LancamentoActivity.this, "Erro (Motivo: "+e.getMessage()+")");
+        }
+    }
+
+    private void lancamentoToForm(Lancamento Lancamento) throws Exception {
+        try{
+            editText_valor.setText(Lancamento.getValor() == 0.0 ? "" : StringUtils.formataDouble(Lancamento.getValor(), 2));
+            editText_data.setText(sdf.format(Lancamento.getData()));
+            editText_descricao.setText(lancamento.getDescricao());
+        } catch (Exception e) {
+            throw new Exception("Erro ao preencher lançamento (Motivo: "+e.getMessage()+")");
+        }
+    }
+
+    private void salvar(){
+        try{
+            lancamento.setValor(StringUtils.formataVerificaValor(editText_valor.getText().toString()));
+            lancamento.setData(sdf.parse(editText_data.getText().toString()));
+            lancamento.setDescricao(editText_descricao.getText().toString());
 
             if (lancamento.getValor() == 0.0) {
                 throw new Exception("Valor deve ser maior que 0,00 (zero)");
@@ -220,7 +163,48 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             }
         } catch (Exception e) {
             e.printStackTrace();
+            UtilsApp.showToast(LancamentoActivity.this, "Erro ao salvar (Motivo: " + e.getMessage() + ")");
         }
     }
+
+    // ## Action Bar ##
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_app, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    // ## Action Bar ##
+
+    // ## Voltar ##
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(LancamentoActivity.this, MainActivity.class));
+        finish();
+        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+    }
+    // ## Voltar ##
+
+    // ## DataPicker ##
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        editText_data.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+    }
+    // ## DataPicker ##
 
 }
