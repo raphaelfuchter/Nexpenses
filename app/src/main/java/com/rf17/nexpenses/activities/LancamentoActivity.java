@@ -39,7 +39,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-    private ImageView icon;
     private EditText editText_valor, editText_data, editText_descricao;
     private TextView header, icon_description;
     private FloatingActionButton fab_salvar;
@@ -52,7 +51,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             this.appPreferences = NexpensesApplication.getAppPreferences();
 
             header = (TextView) findViewById(R.id.header);
-            icon = (ImageView) findViewById(R.id.icon);
             icon_description = (TextView) findViewById(R.id.icon_description);
             editText_valor = (EditText) findViewById(R.id.editText_valor);
             editText_data = (EditText) findViewById(R.id.editText_data);
@@ -71,6 +69,9 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             header.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
 
             String id = getIntent().getStringExtra("id");
+
+            System.out.println("ID DO LANCAMENTO: "+id);
+
             if (id != null) {//Editar
                 lancamentoDao.open();
                 lancamento = lancamentoDao.getById(Integer.parseInt(id));//Busca lancamento no banco de dados
@@ -80,10 +81,9 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 lancamento.setTipo(getIntent().getStringExtra("tipo"));
             }
 
-            Drawable despesa = getResources().getDrawable(R.drawable.despesa_pink);
-            Drawable receita = getResources().getDrawable(R.drawable.receita_pink);
+            System.out.println("ID: "+lancamento.getId_lancamento());
+            System.out.println("tipo: "+lancamento.getTipo());
 
-            icon.setImageDrawable(lancamento.getTipo().equals("R") ? receita : despesa);
             icon_description.setText(lancamento.getTipo().equals("R") ? "Receita" : "Despesa");
 
             //Voltar

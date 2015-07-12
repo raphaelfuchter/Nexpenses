@@ -19,9 +19,12 @@ import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
+import com.rf17.nexpenses.utils.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> implements Filterable {
     // Load Settings
@@ -50,12 +53,14 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
 
     @Override
     public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
-        Lancamento lancamento = lancamentos.get(i);
-        appViewHolder.valor.setText(lancamento.getValor()+"");
-        appViewHolder.descricao.setText(lancamento.getDescricao());
-        appViewHolder.data.setText(lancamento.getData().toString());
-        //appViewHolder.vIcon.setImageDrawable(appInfo.getIcon()); FIXME
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        Lancamento lancamento = lancamentos.get(i);
+        appViewHolder.valor.setText(StringUtils.getPrecoFormatado(lancamento.getValor()));//Valor do lancamento
+        appViewHolder.descricao.setText(lancamento.getDescricao());//Descricao do lancamento
+        appViewHolder.data.setText(sdf.format(lancamento.getData()));//Data do lancamento
+        //appViewHolder.vIcon.setImageDrawable(appInfo.getIcon()); FIXME //Imagem/categoria do lancamento
 
         setButtonEvents(appViewHolder, lancamento);
 
@@ -67,20 +72,12 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Activity activity = (Activity) context;
+                //Activity activity = (Activity) context;
 
                 Intent intent = new Intent(context, LancamentoActivity.class);
-                //intent.putExtra("id", lancamento.getId_lancamento());
-                //intent.putExtra("app_apk", appInfo.getAPK());
-                //intent.putExtra("app_version", appInfo.getVersion());
-                //intent.putExtra("app_source", appInfo.getSource());
-                //intent.putExtra("app_data", appInfo.getData());
-                //Bitmap bitmap = ((BitmapDrawable) appInfo.getIcon()).getBitmap();
-                //intent.putExtra("app_icon", bitmap);
-                //intent.putExtra("app_isSystem", appInfo.isSystem());
-
-                context.startActivity(intent);
-                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
+                intent.putExtra("id", lancamento.getId_lancamento());//
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                //activity.overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
             }
         });
 
@@ -124,7 +121,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View appAdapterView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_layout, viewGroup, false);
+        View appAdapterView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lancamento_row, viewGroup, false);
         return new AppViewHolder(appAdapterView);
     }
 
