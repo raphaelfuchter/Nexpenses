@@ -17,27 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!-- Icone -->
-            <ImageView
-                android:id="@+id/imgIcon"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:src="@drawable/ic_android"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"/>
-            <!-- Icone -->
-
             <!-- Data -->
             <TextView
                 android:id="@+id/txt_data"
-                android:fontFamily="sans-serif-thin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginLeft="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Data"
                 android:textColor="@android:color/black"
@@ -47,11 +33,12 @@
             <!-- Descricao -->
             <TextView
                 android:id="@+id/txtDescricao"
-                android:fontFamily="sans-serif-thin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginLeft="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="150dp"
+                android:layout_marginEnd="150dp"
                 android:layout_marginTop="30dp"
                 android:text="descricao"
                 android:textColor="@android:color/black"
@@ -62,9 +49,8 @@
             <!-- Valor -->
             <TextView
                 android:id="@+id/txtValor"
-                android:fontFamily="sans-serif-thin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="16dp"
                 android:text="Valor"

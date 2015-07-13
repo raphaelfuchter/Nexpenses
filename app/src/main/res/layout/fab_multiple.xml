@@ -9,13 +9,13 @@
     android:layout_margin="@dimen/fab_margin"
     app:fab_labelStyle="@style/menu_labels_style"
     app:fab_addButtonColorNormal="@color/primary"
-    app:fab_addButtonColorPressed="@color/primary_dark">
+    app:fab_addButtonColorPressed="@color/primary_dark" >
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_receita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fab_icon="@drawable/ic_send_white"
+        app:fab_icon="@drawable/ic_trending_up_white"
         app:fab_colorNormal="@color/fab"
         app:fab_title="Receita" />
 
@@ -23,7 +23,7 @@
         android:id="@+id/fab_despesa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fab_icon="@drawable/ic_send_white"
+        app:fab_icon="@drawable/ic_trending_down_white"
         app:fab_colorNormal="@color/fab"
         app:fab_title="Despesa" />
 
