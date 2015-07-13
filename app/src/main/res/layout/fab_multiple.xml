@@ -10,6 +10,7 @@
     app:fab_labelStyle="@style/menu_labels_style"
     app:fab_addButtonColorNormal="@color/primary"
     app:fab_addButtonColorPressed="@color/primary_dark">
+
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_receita"
         android:layout_width="wrap_content"
@@ -25,13 +26,5 @@
         app:fab_icon="@drawable/ic_send_white"
         app:fab_colorNormal="@color/fab"
         app:fab_title="Despesa" />
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:fab_colorNormal="@color/fab"
-        app:fab_title="fab_main" />
 
 </com.getbase.floatingactionbutton.FloatingActionsMenu>

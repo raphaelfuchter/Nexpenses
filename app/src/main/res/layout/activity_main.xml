@@ -1,18 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:wheel="http://schemas.android.com/apk/res-auto"
-                xmlns:recyclerviewfastscroller="http://schemas.android.com/apk/res-auto"
-                xmlns:app="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+    <!-- Action Bar -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+    <!-- Action Bar -->
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_content"
         android:layout_below="@id/toolbar">
+
+        <!-- Progresso/Carregando -->
         <com.pnikosis.materialishprogress.ProgressWheel
             android:id="@+id/progress"
             android:layout_width="80dp"
@@ -22,6 +25,8 @@
             android:visibility="gone"
             wheel:matProg_barColor="@color/primary"
             wheel:matProg_progressIndeterminate="true" />
+        <!-- Progresso/Carregando -->
+
         <LinearLayout
             android:id="@+id/noResults"
             android:visibility="gone"
@@ -41,7 +46,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
-
+        <!-- Buscar novamente/Filtrar -->
         <com.yalantis.phoenix.PullToRefreshView
             android:id="@+id/pull_to_refresh"
             android:layout_width="match_parent"
@@ -52,29 +57,18 @@
                 android:layout_height="match_parent"
                 android:paddingRight="25dp" />
         </com.yalantis.phoenix.PullToRefreshView>
-
-
-        <xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
-            android:id="@+id/fast_scroller"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            recyclerviewfastscroller:rfs_barColor="@color/transparent"
-            recyclerviewfastscroller:rfs_handleBackground="@drawable/fastscroller_rounded"/>
+        <!-- Buscar novamente/Filtrar -->
 
     </RelativeLayout>
 
+    <!-- Floating Action Button -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <include
             android:id="@+id/fab"
             layout="@layout/fab_multiple" />
-
     </FrameLayout>
+    <!-- Floating Action Button -->
 
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.activities.AboutActivity;
 import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.activities.SettingsActivity;
 import com.rf17.nexpenses.adapters.AppAdapter;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -28,8 +29,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import java.util.Calendar;
 
 public class UtilsUI {
-    // Load Settings
-    private static AppPreferences appPreferences;
+
+    private static AppPreferences appPreferences;// Load Settings
 
     public static int darker (int color, double factor) {
         int a = Color.alpha(color);
@@ -62,10 +63,10 @@ public class UtilsUI {
                 .withStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8))
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_lancamentos)).withIcon(FontAwesome.Icon.faw_money),
-                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_categorias)).withIcon(FontAwesome.Icon.faw_tags),
-                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_graficos)).withIcon(FontAwesome.Icon.faw_area_chart),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_categorias)).withIcon(FontAwesome.Icon.faw_tags).withCheckable(false),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_graficos)).withIcon(FontAwesome.Icon.faw_area_chart).withCheckable(false),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart),
+                        new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart).withCheckable(false),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(FontAwesome.Icon.faw_cog).withCheckable(false),
                         new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(FontAwesome.Icon.faw_info_circle).withCheckable(false)
@@ -74,23 +75,25 @@ public class UtilsUI {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position) {
-                            case 0:
-                                recyclerView.setAdapter(appAdapter);
+                            case 0://Lancamentos
+                                //FIXME
                                 break;
-                            case 1:
-                                //recyclerView.setAdapter(appSystemAdapter);
+                            case 1://Categorias
+                                //FIXME
                                 break;
-                            case 3:
-                                //recyclerView.setAdapter(appFavoriteAdapter);
+                            case 2://Graficos
+                                //FIXME
                                 break;
-                            case 5:
-                                Log.v("", "Apoie o Desenvolvimento");
+                            case 4://Apoie o Desenvolvimento
+                                //FIXME
                                 break;
-                            case 6:
+                            case 6://Configuracoes
                                 context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                ((Activity) context).finish();
                                 break;
                             case 7://Ajuda e Feedback
                                 context.startActivity(new Intent(context, AboutActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                ((Activity) context).finish();
                                 break;
                             default:
                                 break;

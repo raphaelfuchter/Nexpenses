@@ -1,5 +1,6 @@
 package com.rf17.nexpenses.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -146,8 +147,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        context.startActivity(new Intent(context, MainActivity.class));
         overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+        finish();
     }
 
 }

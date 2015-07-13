@@ -1,18 +1,13 @@
 package com.rf17.nexpenses.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -170,7 +165,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     // ## Action Bar ##
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_app, menu);
+        getMenuInflater().inflate(R.menu.menu_lancamento, menu);
         return true;
     }
 

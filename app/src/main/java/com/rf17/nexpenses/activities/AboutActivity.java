@@ -82,8 +82,8 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(AboutActivity.this, MainActivity.class));
-        finish();
         overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+        finish();
     }
 
 }
