@@ -24,30 +24,8 @@ public class UtilsDialog {
         return materialBuilder.show();
     }
 
-    public static MaterialDialog showTitleContentWithProgress(Context context, String title, String content) {
-        MaterialDialog.Builder materialBuilder = new MaterialDialog.Builder(context)
-                .title(title)
-                .content(content)
-                .cancelable(false)
-                .progress(true, 0);
-        return materialBuilder.show();
-    }
-
-    public static SnackBar showSnackbar(Activity activity, String text, String buttonText, final File file) {
-        final SnackBar snackBar;
-
-        if (file == null) {
-            snackBar = new SnackBar(activity, text, null, null);
-        } else {
-            snackBar = new SnackBar(activity, text, buttonText, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    file.delete();
-                }
-            });
-        }
-
-        return snackBar;
+    public static SnackBar showSnackbar(Activity activity, String text, String buttonText) {
+        return new SnackBar(activity, text, buttonText, null);
     }
 
 }

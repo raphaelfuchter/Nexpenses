@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -34,9 +35,9 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
+    private RelativeLayout toolbar_valor;
     private EditText editText_valor, editText_data, editText_descricao;
-    private TextView header, icon_description;
-    private FloatingActionButton fab_salvar;
+    private FloatingActionButton fab_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +46,17 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             setContentView(R.layout.activity_lancamento);
             this.appPreferences = NexpensesApplication.getAppPreferences();
 
-            header = (TextView) findViewById(R.id.header);
-            icon_description = (TextView) findViewById(R.id.icon_description);
-            editText_valor = (EditText) findViewById(R.id.editText_valor);
-            editText_data = (EditText) findViewById(R.id.editText_data);
-            editText_descricao = (EditText) findViewById(R.id.editText_descricao);
-            fab_salvar = (FloatingActionButton) findViewById(R.id.fab);
+            toolbar_valor  = (RelativeLayout) findViewById(R.id.toolbar_valor);
+            editText_valor = (EditText) findViewById(R.id.txt_valor);
+            editText_data = (EditText) findViewById(R.id.txt_data);
+            editText_descricao = (EditText) findViewById(R.id.txt_descricao);
+            fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            if (getSupportActionBar() != null ) {
-                getSupportActionBar().setTitle("");
-                getSupportActionBar().setHomeButtonEnabled(true);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
 
             UtilsApp.setAppColor(getWindow(), toolbar);
-            header.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
+            toolbar_valor.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
 
             String id = getIntent().getStringExtra("id");
 
@@ -77,9 +72,13 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             }
 
             System.out.println("ID: "+lancamento.getId_lancamento());
-            System.out.println("tipo: "+lancamento.getTipo());
+            System.out.println("tipo: " + lancamento.getTipo());
 
-            icon_description.setText(lancamento.getTipo().equals("R") ? "Receita" : "Despesa");
+            if (getSupportActionBar() != null ) {
+                getSupportActionBar().setTitle(lancamento.getTipo().equals("R") ? "Receita" : "Despesa");
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
 
             //Voltar
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -111,9 +110,9 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             });
 
             //Salvar
-            fab_salvar.setColorNormal(appPreferences.getAccentColorPref());
-            fab_salvar.setColorPressed(UtilsUI.darker(appPreferences.getAccentColorPref(), 0.8));
-            fab_salvar.setOnClickListener(new View.OnClickListener() {
+            fab_save.setColorNormal(appPreferences.getAccentColorPref());
+            fab_save.setColorPressed(UtilsUI.darker(appPreferences.getAccentColorPref(), 0.8));
+            fab_save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     salvar();

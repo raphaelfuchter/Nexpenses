@@ -4,18 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.activities.AboutActivity;
 import com.rf17.nexpenses.R;
-import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.activities.SettingsActivity;
-import com.rf17.nexpenses.adapters.AppAdapter;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -30,8 +26,6 @@ import java.util.Calendar;
 
 public class UtilsUI {
 
-    private static AppPreferences appPreferences;// Load Settings
-
     public static int darker (int color, double factor) {
         int a = Color.alpha(color);
         int r = Color.red(color);
@@ -41,9 +35,9 @@ public class UtilsUI {
         return Color.argb(a, Math.max((int) (r * factor), 0), Math.max((int) (g * factor), 0), Math.max((int) (b * factor), 0));
     }
 
-    public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar, final AppAdapter appAdapter, final RecyclerView recyclerView) {
+    public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar) {
         int header;
-        appPreferences = NexpensesApplication.getAppPreferences();
+        AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
 
         if (getDayOrNight() == 1) {
             header = R.drawable.header_day;
@@ -75,17 +69,14 @@ public class UtilsUI {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position) {
-                            case 0://Lancamentos
-                                //FIXME
-                                break;
                             case 1://Categorias
-                                //FIXME
+                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
                                 break;
                             case 2://Graficos
-                                //FIXME
+                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
                                 break;
                             case 4://Apoie o Desenvolvimento
-                                //FIXME
+                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
                                 break;
                             case 6://Configuracoes
                                 context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

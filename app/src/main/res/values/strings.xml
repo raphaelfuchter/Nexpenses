@@ -17,11 +17,12 @@
 
     <string name="search">Pesquisar</string>
     <string name="search_hint">Pesquisar...</string>
-    <string name="search_noresults">No results were found for your search</string>
+    <string name="search_noresults">Não foram encontrados resultados para sua pesquisa</string>
 
     <!-- Lancamento -->
     <string name="valor">Valor</string>
-
+    <string name="data">Data</string>
+    <string name="descricao">Descrição</string>
 
     <!-- Settings -->
     <string name="settings_bkp">Backup</string>
@@ -52,56 +53,5 @@
 
     <!-- Toasts -->
     <string name="tap_exit">Toque novamente para fechar o app</string>
-
-
-
-
-
-
-
-
-    <string name="send_to">Send \"%s\" using</string>
-    <string name="deleting">Excluindo...</string>
-    <string name="loading">Carregando...</string>
-    <string name="deleting_done">Files deleted!</string>
-    <string name="deleting_error">Something went wrong removing the files</string>
-
-
-    <!-- Dialogs -->
-    <string name="dialog_saved">\"%s\" APK saved</string>
-    <string name="dialog_saved_description">\"%1$s\" APK has been saved into \"MLManager\" folder with name: %2$s</string>
-    <string name="dialog_saving">Saving %s APK...</string>
-    <string name="dialog_saving_description">ML Manager is saving the APK into \"MLManager\" folder.</string>
-    <string name="dialog_about">About %s</string>
-    <string name="dialog_about_description">Developed by Javier Santos.\n\nOpen Source under GPLv3 license.</string>
-    <string name="dialog_run">Open</string>
-    <string name="dialog_run_description">Run this app now</string>
-    <string name="dialog_extract">Extract</string>
-    <string name="dialog_extract_description">Extract this app under \"MLManager\" directory</string>
-    <string name="dialog_extract_fail">Extract failed</string>
-    <string name="dialog_extract_fail_description">Unable to extract this APK. Please, try to restart your device.</string>
-    <string name="dialog_uninstall">Uninstall</string>
-    <string name="dialog_uninstall_description">Uninstall this app right now</string>
-    <string name="dialog_cache">Remove cache</string>
-    <string name="dialog_cache_description">Remove the cache for this app</string>
-    <string name="dialog_cache_success">Cache deleted</string>
-    <string name="dialog_cache_success_description">Cache for %1$s has been removed</string>
-    <string name="dialog_cache_deleting">Deleting cache files...</string>
-    <string name="dialog_cache_deleting_description">Please wait while cache files are being deleted.</string>
-    <string name="dialog_clear_data">Clear data</string>
-    <string name="dialog_clear_data_description">Remove all application data for this app</string>
-    <string name="dialog_clear_data_deleting">Deleting all files...</string>
-    <string name="dialog_clear_data_deleting_description">Please wait while all files are being deleted.</string>
-    <string name="dialog_clear_data_success">Data deleted</string>
-    <string name="dialog_clear_data_success_description">All data for %1$s has been removed</string>
-    <string name="dialog_cache_and_data_error">Root required</string>
-    <string name="dialog_cache_and_data_error_description">To delete data your phone must be rooted and root permission should be given. If you have denied access once. Go to SuperUser app to give access to MLManager.</string>
-
-
-
-    <string name="button_extract">Extract</string>
-    <string name="button_share">Share APK</string>
-
-
 
 </resources>

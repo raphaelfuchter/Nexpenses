@@ -1,7 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,197 +10,90 @@
         layout="@layout/toolbar" />
     <!-- Toolbar -->
 
-    <!-- Barra superior -->
+    <!-- Toolbar Valor -->
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="115dp"
-        android:orientation="vertical"
+        android:id="@+id/toolbar_valor"
         android:layout_below="@id/toolbar"
-        android:id="@+id/relativeLayout1">
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:orientation="vertical"
+        android:background="@color/primary">
 
-        <TextView
-            android:id="@+id/header"
+        <EditText
+            android:id="@+id/txt_valor"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:background="@color/primary" />
-
-        <!-- Icone -->
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/fab_categoria"
-            android:layout_width="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            fab:fab_size="mini"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fab_colorNormal="@color/fab"/>
-        <!-- Icone -->
-
-        <!-- Descricao icone -->
-        <TextView
-            android:id="@+id/icon_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="descricao"
-            android:textSize="22dp"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@id/fab_categoria"
-            android:layout_centerHorizontal="true" />
-        <!-- Descricao icone -->
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:digits="1234567890.,"
+            android:inputType="numberDecimal"
+            android:textSize="20sp"
+            android:hint="@string/valor"
+            android:textColor="@color/background"
+            android:textColorHint="@color/background"
+            android:background="@android:color/transparent"/>
 
     </RelativeLayout>
-    <!-- Barra superior -->
+    <!-- Toolbar Valor -->
 
-    <!-- Card Valor -->
-    <RelativeLayout
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="135dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:id="@+id/relativeLayout2">
-
-        <!-- Card Interior -->
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/id_card"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            card_view:cardCornerRadius="2dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_margin="5dp">
-
-            <!-- Valor -->
-            <EditText
-                android:id="@+id/editText_valor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textView_valor"
-                android:digits="1234567890.,"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Valor"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textStyle="bold"/>
-            <!-- Valor -->
-
-        </android.support.v7.widget.CardView>
-        <!-- Card Interior -->
-
-    </RelativeLayout>
-    <!-- Card Valor -->
+        app:fab_colorNormal="@color/fab"
+        app:fab_size="mini"
+        android:src="@drawable/ic_check_white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"/>
 
     <!-- Scroll informações -->
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@id/relativeLayout2">
+        android:layout_below="@id/toolbar_valor">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-
-            <!-- Card Data -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/start_card"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                card_view:cardCornerRadius="2dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp">
-
-                <!-- Title Data -->
-                <TextView
-                    android:id="@+id/textView_data"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/editText_valor"
-                    android:text="Data"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-                <!-- Title Data -->
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
                 <!-- Data -->
                 <EditText
-                    android:id="@+id/editText_data"
+                    android:id="@+id/txt_data"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/editText_valor"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/textView_data"
-                    android:ems="10"
+                    android:layout_height="40dp"
+                    android:hint="@string/data"
                     android:focusable="false"
                     android:inputType="date"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginTop="20dp"
+                    android:textSize="16sp"
+                    android:background="@android:color/transparent"/>
                 <!-- Data -->
-
-                <!-- Title Descricao -->
-                <TextView
-                    android:id="@+id/textView_descricao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/editText_data"
-                    android:text="Descrição"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_marginTop="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
-                <!-- Title Descricao -->
 
                 <!-- Descricao -->
                 <EditText
-                    android:id="@+id/editText_descricao"
+                    android:id="@+id/txt_descricao"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/editText_data"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/textView_descricao"
+                    android:layout_height="40dp"
+                    android:hint="@string/descricao"
+                    android:layout_below="@+id/txt_data"
                     android:inputType="textMultiLine"
-                    android:layout_gravity="center_horizontal|top"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:lines="3"
-                    android:maxLines="3"/>
-                <!-- Descricao -->
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="10"
+                    android:background="@android:color/transparent"/>
 
-            </android.support.v7.widget.CardView>
-            <!-- Card Data -->
+            <!-- Descricao -->
 
         </RelativeLayout>
     </ScrollView>
     <!-- Scroll informações -->
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/fab"
-            layout="@layout/fab_single" />
-
-    </FrameLayout>
 
 </RelativeLayout>

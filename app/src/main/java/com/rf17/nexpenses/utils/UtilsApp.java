@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,26 +12,11 @@ import android.widget.Toast;
 
 import com.rf17.nexpenses.NexpensesApplication;
 
-import java.io.File;
-
 public class UtilsApp {
-    // Load Settings
-    private static AppPreferences appPreferences;
-
-    public static File getAppFolder() {
-        return new File(Environment.getExternalStorageDirectory() + "/MLManager");
-    }
 
     public static Intent goToGooglePlay(String id) {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
         intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + id));
-
-        return intent;
-    }
-
-    public static Intent goToGooglePlus(String id) {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://plus.google.com/" + id));
 
         return intent;
     }
@@ -80,7 +64,7 @@ public class UtilsApp {
 
     public static void setAppColor(Window window, Toolbar toolbar){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appPreferences = NexpensesApplication.getAppPreferences();
+            AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
             toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
