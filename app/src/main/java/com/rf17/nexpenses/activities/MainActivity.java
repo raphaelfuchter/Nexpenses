@@ -3,7 +3,6 @@ package com.rf17.nexpenses.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
@@ -19,8 +18,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.mikepenz.iconics.typeface.FontAwesome;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.adapters.AppAdapter;
@@ -36,18 +33,10 @@ import com.yalantis.phoenix.PullToRefreshView;
 import java.util.Date;
 import java.util.List;
 
-import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
-
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-    // Load Settings
-    private AppPreferences appPreferences;
-
-    // General variables
-    private List<Lancamento> lancamentos;
 
     private AppAdapter appAdapter;
 
-    // Configuration variables
     private Boolean doubleBackToExitPressedOnce = false;
     private Toolbar toolbar;
     private Context context;
@@ -57,14 +46,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private Drawer drawer;
     private MenuItem searchItem;
     private SearchView searchView;
-    //private static VerticalRecyclerViewFastScroller fastScroller;
     private static LinearLayout noResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.appPreferences = NexpensesApplication.getAppPreferences();
+        AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
         this.context = this;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -90,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar, appAdapter, recyclerView);
+        drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
 
         progressWheel.setBarColor(appPreferences.getPrimaryColorPref());
         progressWheel.setVisibility(View.VISIBLE);
@@ -137,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             LancamentoDao lancamentoDao = new LancamentoDao(context);
             lancamentoDao.open();
-            lancamentos = lancamentoDao.ListAll(new Date());
+            List<Lancamento> lancamentos = lancamentoDao.ListAll(new Date());
             lancamentoDao.close();
 
             appAdapter = new AppAdapter(lancamentos, context);
@@ -149,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             searchItem.setVisible(true);
 
             setPullToRefreshView(pullToRefreshView);
-            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar, appAdapter, recyclerView);
+            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
         }catch (Exception e){
             e.printStackTrace();
         }

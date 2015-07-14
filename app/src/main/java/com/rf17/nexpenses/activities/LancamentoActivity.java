@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rf17.nexpenses.NexpensesApplication;
@@ -28,29 +27,25 @@ import java.util.Locale;
 
 public class LancamentoActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private AppPreferences appPreferences;
-
     private Lancamento lancamento;
 
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-    private RelativeLayout toolbar_valor;
     private EditText editText_valor, editText_data, editText_descricao;
-    private FloatingActionButton fab_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_lancamento);
-            this.appPreferences = NexpensesApplication.getAppPreferences();
+            AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
 
-            toolbar_valor  = (RelativeLayout) findViewById(R.id.toolbar_valor);
+            RelativeLayout toolbar_valor  = (RelativeLayout) findViewById(R.id.toolbar_valor);
             editText_valor = (EditText) findViewById(R.id.txt_valor);
             editText_data = (EditText) findViewById(R.id.txt_data);
             editText_descricao = (EditText) findViewById(R.id.txt_descricao);
-            fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
+            FloatingActionButton fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
