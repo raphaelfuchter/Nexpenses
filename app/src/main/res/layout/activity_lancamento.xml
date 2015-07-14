@@ -67,7 +67,7 @@
                 <EditText
                     android:id="@+id/txt_data"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:hint="@string/data"
                     android:focusable="false"
                     android:inputType="date"
@@ -80,13 +80,13 @@
                 <EditText
                     android:id="@+id/txt_descricao"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:hint="@string/descricao"
                     android:layout_below="@+id/txt_data"
                     android:inputType="textMultiLine"
                     android:textSize="16sp"
-                    android:layout_marginTop="10dp"
-                    android:maxLines="10"
+                    android:layout_marginTop="20dp"
+                    android:windowSoftInputMode="adjustPan"
                     android:background="@android:color/transparent"/>
 
             <!-- Descricao -->

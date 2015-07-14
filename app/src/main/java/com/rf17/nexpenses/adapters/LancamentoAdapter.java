@@ -1,9 +1,11 @@
 package com.rf17.nexpenses.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +13,26 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.StringUtils;
+import com.rf17.nexpenses.utils.UtilsApp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> implements Filterable {
+public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.AppViewHolder> implements Filterable {
 
     private List<Lancamento> lancamentos;
     private List<Lancamento> lancamentosSearch;
     private Context context;
 
-    public AppAdapter(List<Lancamento> lancamentos, Context context) {
+    public LancamentoAdapter(List<Lancamento> lancamentos, Context context) {
         this.lancamentos = lancamentos;
         this.context = context;
     }
@@ -63,15 +67,49 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Activity activity = (Activity) context;
-
                 Intent intent = new Intent(context, LancamentoActivity.class);
                 intent.putExtra("id", lancamento.getId_lancamento());//
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                //activity.overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
+                ((Activity) context).finish();
             }
         });
 
+        cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                /*
+                new MaterialDialog.Builder(MainActivity.this)
+                        .title(R.string.excluir_title)
+                        .content(R.string.excluir_content)
+                        .positiveText(R.string.excluir)
+                        .negativeText(R.string.nao)
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                try {
+                                    lancamentoDao.open();
+                                    lancamentoDao.delete(lancamentoDao.getById(row.getId()));
+                                    lancamentoDao.close();
+
+                                    //Data data = (Data) spinner_periodo.getSelectedItem();
+                                    //filtrar(data.getDate());//Atualiza lista novamente
+
+                                    //Excluido com sucesso!
+
+                                } catch (Exception e) {
+                                    UtilsApp.showToast(MainActivity.this, e.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void onNegative(MaterialDialog dialog) {
+                            }
+                        })
+                        .show();
+                */
+                return true;
+            }
+        });
     }
 
     public Filter getFilter() {

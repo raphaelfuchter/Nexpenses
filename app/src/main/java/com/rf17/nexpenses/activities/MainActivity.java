@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
-import com.rf17.nexpenses.adapters.AppAdapter;
+import com.rf17.nexpenses.adapters.LancamentoAdapter;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.AppPreferences;
@@ -35,7 +35,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private AppAdapter appAdapter;
+    private LancamentoAdapter lancamentoAdapter;
 
     private Boolean doubleBackToExitPressedOnce = false;
     private Toolbar toolbar;
@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             List<Lancamento> lancamentos = lancamentoDao.ListAll(new Date());
             lancamentoDao.close();
 
-            appAdapter = new AppAdapter(lancamentos, context);
-            recyclerView.setAdapter(appAdapter);
+            lancamentoAdapter = new LancamentoAdapter(lancamentos, context);
+            recyclerView.setAdapter(lancamentoAdapter);
 
             pullToRefreshView.setEnabled(true);
             progressWheel.setVisibility(View.GONE);
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                appAdapter.clear();
+                lancamentoAdapter.clear();
                 recyclerView.setAdapter(null);
                 filtrar();
 
@@ -164,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String search) {
         if (search.isEmpty()) {
-            ((AppAdapter) recyclerView.getAdapter()).getFilter().filter("");
+            ((LancamentoAdapter) recyclerView.getAdapter()).getFilter().filter("");
         } else {
-            ((AppAdapter) recyclerView.getAdapter()).getFilter().filter(search);
+            ((LancamentoAdapter) recyclerView.getAdapter()).getFilter().filter(search);
         }
 
         return false;

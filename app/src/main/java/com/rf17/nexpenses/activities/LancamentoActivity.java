@@ -53,21 +53,15 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             UtilsApp.setAppColor(getWindow(), toolbar);
             toolbar_valor.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
 
-            String id = getIntent().getStringExtra("id");
-
-            System.out.println("ID DO LANCAMENTO: "+id);
-
-            if (id != null) {//Editar
+            Integer id = getIntent().getIntExtra("id", 0);
+            if (id != 0) {//Editar
                 lancamentoDao.open();
-                lancamento = lancamentoDao.getById(Integer.parseInt(id));//Busca lancamento no banco de dados
+                lancamento = lancamentoDao.getById(id);//Busca lancamento no banco de dados
                 lancamentoDao.close();
             } else {//Novo
                 lancamento = new Lancamento();
                 lancamento.setTipo(getIntent().getStringExtra("tipo"));
             }
-
-            System.out.println("ID: "+lancamento.getId_lancamento());
-            System.out.println("tipo: " + lancamento.getTipo());
 
             if (getSupportActionBar() != null ) {
                 getSupportActionBar().setTitle(lancamento.getTipo().equals("R") ? "Receita" : "Despesa");
@@ -82,7 +76,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                     onBackPressed();
                 }
             });
-
 
             //DatePicker
             editText_data.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +144,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 onBackPressed();
             }
         } catch (Exception e) {
-            e.printStackTrace();
             UtilsApp.showToast(LancamentoActivity.this, "Erro ao salvar (Motivo: " + e.getMessage() + ")");
         }
     }
