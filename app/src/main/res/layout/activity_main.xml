@@ -10,10 +10,37 @@
     <!-- Action Bar -->
 
     <RelativeLayout
+        android:id="@+id/toolbar_saldo"
+        android:layout_below="@id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:orientation="vertical"
+        android:background="@color/primary"
+        android:elevation="4dp">
+
+        <!-- Saldo -->
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo: R$ 1020,10"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+        <!-- Saldo -->
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_content"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@+id/toolbar_saldo">
 
         <!-- Progresso/Carregando -->
         <com.pnikosis.materialishprogress.ProgressWheel
@@ -51,11 +78,12 @@
             android:id="@+id/pull_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/appList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="25dp" />
+                android:layout_height="match_parent" />
+
         </com.yalantis.phoenix.PullToRefreshView>
         <!-- Buscar novamente/Filtrar -->
 

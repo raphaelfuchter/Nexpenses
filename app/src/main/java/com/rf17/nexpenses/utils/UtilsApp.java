@@ -65,12 +65,12 @@ public class UtilsApp {
     public static void setAppColor(Window window, Toolbar toolbar){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
             toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (appPreferences.getNavigationColorPref()) {
+            //if (appPreferences.getNavigationColorPref()) {
                 window.setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            }
+            //}
         }
     }
 

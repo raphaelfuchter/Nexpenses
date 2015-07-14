@@ -24,6 +24,12 @@
     <string name="data">Data</string>
     <string name="descricao">Descrição</string>
 
+    <!-- Dialogs -->
+    <string name="excluir_title">Excluir?</string>
+    <string name="excluir_content">Você deseja excluir este lançamento?</string>
+    <string name="excluir">EXCLUIR</string>
+    <string name="nao">NÃO</string>
+
     <!-- Settings -->
     <string name="settings_bkp">Backup</string>
     <string name="settings_password">Senha</string>

@@ -8,4 +8,5 @@
     android:background="?attr/colorPrimary"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:navigationIcon="?attr/homeAsUpIndicator"/>
+    app:navigationIcon="?attr/homeAsUpIndicator"
+    android:elevation="4dp"/>

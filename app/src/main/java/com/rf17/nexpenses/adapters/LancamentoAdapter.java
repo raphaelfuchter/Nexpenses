@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
+import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.StringUtils;
 import com.rf17.nexpenses.utils.UtilsApp;
@@ -53,6 +54,13 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
         Lancamento lancamento = lancamentos.get(i);
+
+        if(lancamento.getTipo().equals("R")){
+            appViewHolder.valor.setTextColor(context.getResources().getColor(R.color.green));
+        }else{
+            appViewHolder.valor.setTextColor(context.getResources().getColor(R.color.red));
+        }
+
         appViewHolder.valor.setText(StringUtils.getPrecoFormatado(lancamento.getValor()));//Valor do lancamento
         appViewHolder.descricao.setText(lancamento.getDescricao());//Descricao do lancamento
         appViewHolder.data.setText(sdf.format(lancamento.getData()));//Data do lancamento
@@ -77,8 +85,8 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
         cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                /*
-                new MaterialDialog.Builder(MainActivity.this)
+
+                new MaterialDialog.Builder(context)
                         .title(R.string.excluir_title)
                         .content(R.string.excluir_content)
                         .positiveText(R.string.excluir)
@@ -87,8 +95,9 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
                             @Override
                             public void onPositive(MaterialDialog dialog) {
                                 try {
+                                    LancamentoDao lancamentoDao = new LancamentoDao(context);
                                     lancamentoDao.open();
-                                    lancamentoDao.delete(lancamentoDao.getById(row.getId()));
+                                    lancamentoDao.delete(lancamento);
                                     lancamentoDao.close();
 
                                     //Data data = (Data) spinner_periodo.getSelectedItem();
@@ -97,16 +106,15 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
                                     //Excluido com sucesso!
 
                                 } catch (Exception e) {
-                                    UtilsApp.showToast(MainActivity.this, e.getMessage());
+                                    //UtilsApp.showToast(MainActivity.this, e.getMessage());
                                 }
                             }
 
                             @Override
-                            public void onNegative(MaterialDialog dialog) {
-                            }
+                            public void onNegative(MaterialDialog dialog) { }
                         })
                         .show();
-                */
+
                 return true;
             }
         });

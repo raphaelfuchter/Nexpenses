@@ -19,7 +19,6 @@ import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.Calendar;
@@ -60,23 +59,23 @@ public class UtilsUI {
                         new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_categorias)).withIcon(FontAwesome.Icon.faw_tags).withCheckable(false),
                         new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_graficos)).withIcon(FontAwesome.Icon.faw_area_chart).withCheckable(false),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart).withCheckable(false),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart).withCheckable(false),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(FontAwesome.Icon.faw_cog).withCheckable(false),
-                        new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(FontAwesome.Icon.faw_info_circle).withCheckable(false)
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(FontAwesome.Icon.faw_cog).withCheckable(false),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(FontAwesome.Icon.faw_info_circle).withCheckable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position) {
                             case 1://Categorias
-                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
+                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
                                 break;
                             case 2://Graficos
-                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
+                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
                                 break;
                             case 4://Apoie o Desenvolvimento
-                                UtilsApp.showToast(((Activity) context), "Opção disponível em próximas versões, aguarde...");
+                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
                                 break;
                             case 6://Configuracoes
                                 context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

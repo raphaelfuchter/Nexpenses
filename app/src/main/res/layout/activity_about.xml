@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:id="@+id/relativeLayout1">
+        android:id="@+id/relativeLayout1"
+        android:elevation="4dp">
 
         <TextView
             android:id="@+id/header"
