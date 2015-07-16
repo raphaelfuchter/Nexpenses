@@ -83,6 +83,7 @@ public class LancamentoDao {
     }
 
     public long saveOrUpdate(Lancamento lancamento) {
+        lancamento.setData_atual(new Date());
         if(lancamento.getId_lancamento() == null) {
             return database.insert("lancamento", null, lancamentoToContentValues(lancamento));
         }else{

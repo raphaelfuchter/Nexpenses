@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.StringUtils;
-import com.rf17.nexpenses.utils.UtilsApp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,7 +158,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View appAdapterView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lancamento_row, viewGroup, false);
+        View appAdapterView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_lancamento, viewGroup, false);
         return new AppViewHolder(appAdapterView);
     }
 

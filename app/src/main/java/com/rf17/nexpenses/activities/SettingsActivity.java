@@ -48,7 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         prefs.registerOnSharedPreferenceChangeListener(this);
 
         // Configurações
-        prefSortMode = (ListPreference) findPreference("prefSortMode");
+        //prefSortMode = (ListPreference) findPreference("prefSortMode");
 
         // Temas
         prefPrimaryColor = (AmbilWarnaPreference) findPreference("prefPrimaryColor");
@@ -77,9 +77,10 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         });
 
         // prefSortMode
-        setSortModeSummary();
+        //setSortModeSummary();
 
         // prefDefaultValues
+        /*
         prefDefaultValues.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -88,6 +89,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 return true;
             }
         });
+        */
 
     }
 

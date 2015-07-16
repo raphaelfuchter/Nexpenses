@@ -40,7 +40,7 @@
     <string name="settings_import_description">Importar dados do armazenamento do dispositivo e substituir os dados do aplicativo</string>
 
     <string name="settings_sort_mode">Classificar por</string>
-    <string name="settings_customizations">Temas (Necessário Android 5.0+)</string>
+    <string name="settings_customizations">Temas (Necessário Android 5.0+) - Em Breve</string>
     <string name="settings_primary_color">Cor Primária</string>
     <string name="settings_primary_color_description">A cor primária a ser usada. Padrão é Material Blue.</string>
     <string name="settings_fab_color">Cor de destaque</string>

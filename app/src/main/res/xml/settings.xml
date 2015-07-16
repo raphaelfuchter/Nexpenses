@@ -14,14 +14,14 @@
             android:defaultValue="false" />
         <!-- Senha -->
 
-        <!-- Classificar por -->
+        <!-- Classificar por
         <ListPreference
             android:key="prefSortMode"
             android:title="@string/settings_sort_mode"
             android:entries="@array/sortEntries"
             android:entryValues="@array/sortValues"
             android:defaultValue="1" />
-        <!-- Classificar por -->
+         Classificar por -->
 
     </PreferenceCategory>
     <!-- Configurações -->
@@ -35,7 +35,8 @@
             android:key="prefPrimaryColor"
             android:defaultValue="@color/primary"
             android:title="@string/settings_primary_color"
-            android:summary="@string/settings_primary_color_description"/>
+            android:summary="@string/settings_primary_color_description"
+            android:enabled="false" />
         <!-- Cor Primária -->
 
         <!-- Cor de destaque -->
@@ -43,7 +44,8 @@
             android:key="prefFABColor"
             android:defaultValue="@color/fab"
             android:title="@string/settings_fab_color"
-            android:summary="@string/settings_fab_color_description"/>
+            android:summary="@string/settings_fab_color_description"
+            android:enabled="false" />
         <!-- Cor de destaque -->
 
         <!-- Barra de navegação colorida -->
@@ -51,15 +53,16 @@
             android:key="prefNavigationBlack"
             android:title="@string/settings_navigation_black"
             android:summary="@string/settings_navigation_black_description"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            android:enabled="false" />
         <!-- Barra de navegação colorida -->
 
-        <!-- Restaurar padrão -->
+        <!-- Restaurar padrão
         <Preference
             android:key="prefDefaultValues"
             android:title="@string/settings_default_customization"
             android:summary="@string/settings_default_customization_description" />
-        <!-- Restaurar padrão -->
+         Restaurar padrão -->
 
     </PreferenceCategory>
     <!-- Temas -->

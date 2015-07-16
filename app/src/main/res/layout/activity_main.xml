@@ -18,13 +18,24 @@
         android:background="@color/primary"
         android:elevation="4dp">
 
+        <Spinner
+            android:id="@+id/spinner_data"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true" />
+
         <!-- Saldo -->
         <TextView
-            android:id="@+id/app_name"
+            android:id="@+id/saldo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saldo: R$ 1020,10"
-            android:textSize="20sp"
+            android:text="R$ 1020,10"
+            android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_marginRight="16dp"
             android:layout_marginEnd="16dp"
