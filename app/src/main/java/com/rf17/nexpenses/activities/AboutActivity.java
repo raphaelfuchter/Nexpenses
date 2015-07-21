@@ -40,7 +40,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        UtilsApp.setAppColor(getWindow(), toolbar);
+        UtilsApp.setAppColor(getWindow(), toolbar, getResources());
     }
 
     private void setScreenElements() {

@@ -3,6 +3,7 @@ package com.rf17.nexpenses.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.rf17.nexpenses.NexpensesApplication;
+import com.rf17.nexpenses.R;
 
 public class UtilsApp {
 
@@ -62,7 +64,7 @@ public class UtilsApp {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void setAppColor(Window window, Toolbar toolbar){
+    public static void setAppColor(Window window, Toolbar toolbar, Resources resources){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
             //window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

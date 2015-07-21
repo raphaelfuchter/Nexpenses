@@ -27,6 +27,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:spinnerMode="dialog"
             android:layout_centerVertical="true" />
 
         <!-- Saldo -->
@@ -34,7 +36,7 @@
             android:id="@+id/saldo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R$ 1020,10"
+            android:text="saldo"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_marginRight="16dp"
@@ -47,63 +49,21 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_content"
-        android:layout_below="@+id/toolbar_saldo">
 
-        <!-- Progresso/Carregando -->
-        <com.pnikosis.materialishprogress.ProgressWheel
-            android:id="@+id/progress"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            wheel:matProg_barColor="@color/primary"
-            wheel:matProg_progressIndeterminate="true" />
-        <!-- Progresso/Carregando -->
 
-        <LinearLayout
-            android:id="@+id/noResults"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_search" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_noresults"
-                android:lines="2"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <!-- Buscar novamente/Filtrar -->
-        <com.yalantis.phoenix.PullToRefreshView
-            android:id="@+id/pull_to_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
+        <android.support.v7.widget.RecyclerView
                 android:id="@+id/appList"
+                android:layout_below="@+id/toolbar_saldo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
 
-        </com.yalantis.phoenix.PullToRefreshView>
-        <!-- Buscar novamente/Filtrar -->
 
-    </RelativeLayout>
-
-    <!-- Floating Action Button -->
+    <!-- Floating Action  -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_saldo">
         <include
             android:id="@+id/fab"
             layout="@layout/fab_multiple" />

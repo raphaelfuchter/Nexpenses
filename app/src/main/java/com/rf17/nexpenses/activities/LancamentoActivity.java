@@ -50,7 +50,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            UtilsApp.setAppColor(getWindow(), toolbar);
+            UtilsApp.setAppColor(getWindow(), toolbar, getResources());
             toolbar_valor.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
 
             Integer id = getIntent().getIntExtra("id", 0);

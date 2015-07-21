@@ -115,15 +115,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     private void setInitialConfiguration() {
         toolbar.setTitle(getResources().getString(R.string.action_settings));
 
-        // Android 5.0+ devices
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
-            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            if (appPreferences.getNavigationColorPref()) {
-                getWindow().setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            }
-        }
+        UtilsApp.setAppColor(getWindow(), toolbar, getResources());
 
         // Pre-Lollipop devices
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

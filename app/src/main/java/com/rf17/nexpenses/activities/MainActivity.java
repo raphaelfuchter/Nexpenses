@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private Toolbar toolbar;
     private Context context;
     private RecyclerView recyclerView;
-    private PullToRefreshView pullToRefreshView;
-    private ProgressWheel progressWheel;
+    //private PullToRefreshView pullToRefreshView;
+    //private ProgressWheel progressWheel;
     private Drawer drawer;
     private MenuItem searchItem;
     private SearchView searchView;
-    private static LinearLayout noResults;
+    //private static LinearLayout noResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,34 +74,35 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 getSupportActionBar().setTitle(R.string.app_name);
             }
 
-            UtilsApp.setAppColor(getWindow(), toolbar);
+            UtilsApp.setAppColor(getWindow(), toolbar, getResources());
 
             recyclerView = (RecyclerView) findViewById(R.id.appList);
-            pullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+            //pullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
             //fastScroller = (VerticalRecyclerViewFastScroller) findViewById(R.id.fast_scroller);
-            progressWheel = (ProgressWheel) findViewById(R.id.progress);
-            noResults = (LinearLayout) findViewById(R.id.noResults);
+           // progressWheel = (ProgressWheel) findViewById(R.id.progress);
+            //noResults = (LinearLayout) findViewById(R.id.noResults);
 
             //fastScroller.setRecyclerView(recyclerView);
             //recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
-            pullToRefreshView.setEnabled(false);
+            //pullToRefreshView.setEnabled(false);
 
-            recyclerView.setHasFixedSize(true);
+
+            //recyclerView.setHasFixedSize(true);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(linearLayoutManager);
 
             drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
 
-            progressWheel.setBarColor(appPreferences.getPrimaryColorPref());
-            progressWheel.setVisibility(View.VISIBLE);
+           // progressWheel.setBarColor(appPreferences.getPrimaryColorPref());
+           // progressWheel.setVisibility(View.VISIBLE);
 
             // ## Spinner Periodo ##
             lancamentoDao.open();
             List<Data_filtro> list_periodo = lancamentoDao.ListMonths();
             lancamentoDao.close();
             final Spinner spinner = (Spinner) findViewById(R.id.spinner_data);
-            ArrayAdapter<Data_filtro> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_periodo);
+            ArrayAdapter<Data_filtro> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner, list_periodo);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(dataAdapter);
 
@@ -154,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void filtrar(Date data) {
         try {
-            progressWheel.setVisibility(View.VISIBLE);
-            progressWheel.setProgress(100L);
+            //progressWheel.setVisibility(View.VISIBLE);
+            //progressWheel.setProgress(100L);
 
             lancamentoDao.open();
             List<Lancamento> lancamentos = lancamentoDao.ListAll(data);
@@ -174,12 +175,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
             ((TextView) findViewById(R.id.saldo)).setText(StringUtils.getPrecoFormatado(saldo));
 
-            pullToRefreshView.setEnabled(true);
-            progressWheel.setVisibility(View.GONE);
+            //pullToRefreshView.setEnabled(true);
+            //progressWheel.setVisibility(View.GONE);
 
             searchItem.setVisible(true);
 
-            setPullToRefreshView(pullToRefreshView);
+           // setPullToRefreshView(pullToRefreshView);
             drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
         }catch (Exception e){
             e.printStackTrace();
@@ -217,10 +218,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     public static void setResultsMessage(Boolean result) {
         if (result) {
-            noResults.setVisibility(View.VISIBLE);
+           // noResults.setVisibility(View.VISIBLE);
             //fastScroller.setVisibility(View.GONE);
         } else {
-            noResults.setVisibility(View.GONE);
+           // noResults.setVisibility(View.GONE);
            // fastScroller.setVisibility(View.VISIBLE);
         }
     }
