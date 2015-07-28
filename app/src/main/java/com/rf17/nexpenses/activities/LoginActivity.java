@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.UtilsApp;
+import com.rf17.nexpenses.utils.UtilsUI;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
 
         AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
 
-        Log.v("TESTE", "##AQUI: "+appPreferences.getPasswordBooleanPref());
-
         if(!appPreferences.getPasswordBooleanPref()){
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
@@ -34,11 +34,18 @@ public class LoginActivity extends AppCompatActivity {
 
             UtilsApp.setAppColor(getWindow(), null);
 
+            ImageView background_login = (ImageView) findViewById(R.id.background_login);
+            if (UtilsUI.getDayOrNight() == 1) {
+                background_login.setImageResource(R.drawable.header_day_big);
+            } else {
+                background_login.setImageResource(R.drawable.header_night_big);
+            }
+
             findViewById(R.id.fab_entrar).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-
+                        //Verifica login
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();

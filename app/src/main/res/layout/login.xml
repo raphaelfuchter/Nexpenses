@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/background_login"
         android:src="@drawable/header_day_big"
         android:contentDescription="@string/settings_primary_color"
         android:scaleType="centerCrop"/>
