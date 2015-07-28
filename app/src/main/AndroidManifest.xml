@@ -11,34 +11,32 @@
         android:label="@string/app_name"
         android:theme="@style/Nexpenses"
         android:name=".NexpensesApplication">
+
         <activity
-            android:name="com.rf17.nexpenses.activities.MainActivity"
+            android:name="com.rf17.nexpenses.activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
+
+        <activity
+            android:name="com.rf17.nexpenses.activities.MainActivity" >
+        </activity>
+
         <activity
             android:name=".activities.LancamentoActivity">
         </activity>
+
         <activity
             android:name="com.rf17.nexpenses.activities.SettingsActivity">
         </activity>
+
         <activity
             android:name="com.rf17.nexpenses.activities.AboutActivity">
         </activity>
+
     </application>
 
 </manifest>

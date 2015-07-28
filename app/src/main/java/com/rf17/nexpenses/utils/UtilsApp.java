@@ -64,15 +64,14 @@ public class UtilsApp {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void setAppColor(Window window, Toolbar toolbar, Resources resources){
+    public static void setAppColor(Window window, Toolbar toolbar){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
-            //window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8));
-            toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
-            //if (appPreferences.getNavigationColorPref()) {
-                window.setNavigationBarColor(appPreferences.getPrimaryColorPref());
-            //}
+            window.setNavigationBarColor(appPreferences.getPrimaryColorPref());
+            if(toolbar != null) {
+                toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
+            }
         }
     }
 

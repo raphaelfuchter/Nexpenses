@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,12 +47,12 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             editText_valor = (EditText) findViewById(R.id.txt_valor);
             editText_data = (EditText) findViewById(R.id.txt_data);
             editText_descricao = (EditText) findViewById(R.id.txt_descricao);
-            FloatingActionButton fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
+            final FloatingActionButton fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            UtilsApp.setAppColor(getWindow(), toolbar, getResources());
+            UtilsApp.setAppColor(getWindow(), toolbar);
             toolbar_valor.setBackgroundColor(appPreferences.getPrimaryColorPref());// Header
 
             Integer id = getIntent().getIntExtra("id", 0);
@@ -105,6 +107,22 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 public void onClick(View view) {
                     salvar();
                     onBackPressed();
+                }
+            });
+
+            editText_valor.addTextChangedListener(new TextWatcher() {// ValueChange quantidade
+                public void afterTextChanged(Editable s) { }
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    try {
+                        if (StringUtils.formataVerificaValor(editText_valor.getText().toString()) > 0) {
+                            fab_save.setVisibility(View.VISIBLE);
+                        }else{
+                            fab_save.setVisibility(View.GONE);
+                        }
+                    } catch (Exception e) {
+                        //Nada
+                    }
                 }
             });
 

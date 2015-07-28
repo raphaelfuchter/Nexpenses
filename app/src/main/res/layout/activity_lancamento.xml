@@ -10,22 +10,6 @@
         layout="@layout/toolbar" />
     <!-- Action Bar -->
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fab_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fab_colorNormal="@color/fab"
-        app:fab_size="mini"
-        android:src="@drawable/ic_check_white"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:elevation="10dp" />
-
     <!-- Toolbar Valor -->
     <RelativeLayout
         android:id="@+id/toolbar_valor"
@@ -65,31 +49,32 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp">
 
-                <!-- Data -->
-                <EditText
-                    android:id="@+id/txt_data"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="@string/data"
-                    android:focusable="false"
-                    android:inputType="date"
-                    android:layout_marginTop="15dp"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent"/>
-                <!-- Data -->
+            <!-- Data -->
+            <EditText
+                android:id="@+id/txt_data"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/data"
+                android:focusable="false"
+                android:inputType="date"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"
+                android:background="@android:color/transparent"/>
+            <!-- Data -->
 
-                <!-- Descricao -->
-                <EditText
-                    android:id="@+id/txt_descricao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/descricao"
-                    android:layout_below="@+id/txt_data"
-                    android:inputType="textMultiLine"
-                    android:textSize="16sp"
-                    android:layout_marginTop="15dp"
-                    android:windowSoftInputMode="adjustPan"
-                    android:background="@android:color/transparent"/>
+            <!-- Descricao -->
+            <EditText
+                android:id="@+id/txt_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/descricao"
+                android:layout_below="@+id/txt_data"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:layout_marginTop="15dp"
+                android:singleLine="false"
+                android:minLines="1"
+                android:background="@android:color/transparent"/>
 
             <!-- Descricao -->
 
@@ -97,5 +82,22 @@
     </ScrollView>
     <!-- Scroll informações -->
 
+    <!-- Botão Salvar -->
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/fab"
+        app:fab_size="mini"
+        android:src="@drawable/ic_check_white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:elevation="10dp"/>
+    <!-- Botão Salvar -->
 
 </RelativeLayout>

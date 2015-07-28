@@ -18,7 +18,7 @@ public class AboutActivity extends AppCompatActivity {
     AppPreferences appPreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         this.appPreferences = NexpensesApplication.getAppPreferences();
@@ -40,7 +40,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        UtilsApp.setAppColor(getWindow(), toolbar, getResources());
+        UtilsApp.setAppColor(getWindow(), toolbar);
     }
 
     private void setScreenElements() {

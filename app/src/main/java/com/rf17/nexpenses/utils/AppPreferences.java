@@ -14,9 +14,8 @@ public class AppPreferences {
     private SharedPreferences.Editor editor;
     private Context context;
 
-    public static final String KeyPassword = "prefPassword";
     public static final String KeyPasswordBoolean = "prefPasswordBoolean";
-    public static final String KeySortMode = "prefSortMode";
+    public static final String KeyPassword = "prefPassword";
 
     public static final String KeyPrimaryColor = "prefPrimaryColor";
     public static final String KeyAccentColor = "prefAccentColor";
@@ -28,22 +27,23 @@ public class AppPreferences {
         this.context = context;
     }
 
+    public Boolean getPasswordBooleanPref() {
+        return sharedPreferences.getBoolean(KeyPasswordBoolean, false);
+    }
+    public void setPasswordBooleanPref(Boolean res) {
+        editor.putBoolean(KeyPasswordBoolean, res);
+        editor.commit();
+    }
+
+
     public String getPassoword() {
         return sharedPreferences.getString(KeyPassword, "");
     }
     public void setPassword(String password) {
-        editor.putString(KeySortMode, password);
+        editor.putString(KeyPassword, password);
         editor.commit();
     }
 
-
-    public Boolean getPassowordBooleanPref() {
-        return sharedPreferences.getBoolean(KeyPasswordBoolean, false);
-    }
-    public void setPassowordBooleanPref(Boolean res) {
-        editor.putBoolean(KeyPasswordBoolean, res);
-        editor.commit();
-    }
 
     public int getPrimaryColorPref() {
         return sharedPreferences.getInt(KeyPrimaryColor, context.getResources().getColor(R.color.primary));
@@ -53,6 +53,7 @@ public class AppPreferences {
         editor.commit();
     }
 
+
     public int getAccentColorPref() {
         return sharedPreferences.getInt(KeyAccentColor, context.getResources().getColor(R.color.fab));
     }
@@ -61,29 +62,12 @@ public class AppPreferences {
         editor.commit();
     }
 
+
     public Boolean getNavigationColorPref() {
         return sharedPreferences.getBoolean(KeyNavigationColor, false);
     }
     public void setNavigationColorPref(Boolean res) {
         editor.putBoolean(KeyNavigationColor, res);
-        editor.commit();
-    }
-
-    /*
-    public Boolean getFABShowPref() {
-        return sharedPreferences.getBoolean(KeyFABShow, false);
-    }
-    public void setFABShowPref(Boolean res) {
-        editor.putBoolean(KeyFABShow, res);
-        editor.commit();
-    }
-    */
-
-    public String getSortMode() {
-        return sharedPreferences.getString(KeySortMode, "1");
-    }
-    public void setSortMode(String res) {
-        editor.putString(KeySortMode, res);
         editor.commit();
     }
 

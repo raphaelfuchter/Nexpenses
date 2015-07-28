@@ -8,27 +8,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
-import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.utils.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.AppViewHolder> implements Filterable {
+public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.AppViewHolder> {
 
     private List<Lancamento> lancamentos;
-    private List<Lancamento> lancamentosSearch;
+    //private List<Lancamento> lancamentosSearch;
     private Context context;
 
     public LancamentoAdapter(List<Lancamento> lancamentos, Context context) {
@@ -41,10 +37,12 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
         return lancamentos.size();
     }
 
+    /*
     public void clear() {
         lancamentos.clear();
         notifyDataSetChanged();
     }
+    */
 
     @Override
     public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
@@ -118,6 +116,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
         });
     }
 
+    /*
     public Filter getFilter() {
         return new Filter() {
             @Override
@@ -155,6 +154,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
             }
         };
     }
+    */
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {

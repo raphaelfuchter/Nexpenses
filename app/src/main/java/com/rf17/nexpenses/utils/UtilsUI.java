@@ -69,13 +69,13 @@ public class UtilsUI {
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position) {
                             case 1://Categorias
-                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
+                                UtilsApp.showToast(((Activity) context), "Em breve");
                                 break;
                             case 2://Graficos
-                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
+                                UtilsApp.showToast(((Activity) context), "Em breve");
                                 break;
                             case 4://Apoie o Desenvolvimento
-                                UtilsApp.showToast(((Activity) context), "Opção ainda não disponível, desculpe.");
+                                UtilsApp.showToast(((Activity) context), "Em breve");
                                 break;
                             case 6://Configuracoes
                                 context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

@@ -5,49 +5,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.adapters.LancamentoAdapter;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Data_filtro;
 import com.rf17.nexpenses.model.Lancamento;
-import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.StringUtils;
 import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 import com.mikepenz.materialdrawer.Drawer;
-import com.pnikosis.materialishprogress.ProgressWheel;
-import com.yalantis.phoenix.PullToRefreshView;
-
-import org.w3c.dom.Text;
 
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity {
 
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
-
-    private LancamentoAdapter lancamentoAdapter;
 
     private Boolean doubleBackToExitPressedOnce = false;
     private Toolbar toolbar;
@@ -56,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     //private PullToRefreshView pullToRefreshView;
     //private ProgressWheel progressWheel;
     private Drawer drawer;
-    private MenuItem searchItem;
-    private SearchView searchView;
+    //private MenuItem searchItem;
+    //private SearchView searchView;
     //private static LinearLayout noResults;
 
     @Override
@@ -65,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         try{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
+            //AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
             this.context = this;
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -74,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 getSupportActionBar().setTitle(R.string.app_name);
             }
 
-            UtilsApp.setAppColor(getWindow(), toolbar, getResources());
+            UtilsApp.setAppColor(getWindow(), toolbar);
 
             recyclerView = (RecyclerView) findViewById(R.id.appList);
             //pullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
@@ -162,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             List<Lancamento> lancamentos = lancamentoDao.ListAll(data);
             lancamentoDao.close();
 
-            lancamentoAdapter = new LancamentoAdapter(lancamentos, context);
+            LancamentoAdapter lancamentoAdapter = new LancamentoAdapter(lancamentos, context);
             recyclerView.setAdapter(lancamentoAdapter);
 
             double saldo = 0.0;
@@ -178,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             //pullToRefreshView.setEnabled(true);
             //progressWheel.setVisibility(View.GONE);
 
-            searchItem.setVisible(true);
+            //searchItem.setVisible(true);
 
            // setPullToRefreshView(pullToRefreshView);
             drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
@@ -187,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    /*
     private void setPullToRefreshView(final PullToRefreshView pullToRefreshView) {
         pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -205,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
     }
 
+
     @Override
     public boolean onQueryTextChange(String search) {
         if (search.isEmpty()) {
@@ -215,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         return false;
     }
+
 
     public static void setResultsMessage(Boolean result) {
         if (result) {
@@ -230,15 +219,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        searchItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -246,8 +233,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void onBackPressed() {
         if (drawer.isDrawerOpen()) {
             drawer.closeDrawer();
-        } else if (searchItem.isVisible() && !searchView.isIconified()) {
-            searchView.onActionViewCollapsed();
+        //} else if (searchItem.isVisible() && !searchView.isIconified()) {
+        //   searchView.onActionViewCollapsed();
         } else {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed();

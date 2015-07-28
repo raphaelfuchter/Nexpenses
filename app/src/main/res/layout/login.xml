@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/header_day_big"
+        android:contentDescription="@string/settings_primary_color"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/about_developer"
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            card_view:cardCornerRadius="5dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:elevation="10dp">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/fab"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/fab"
+                android:text="LOGIN"
+                android:id="@+id/login_title"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/pincode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:inputType="numberPassword"
+                android:hint="Senha"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab_entrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/accent"
+        app:fab_colorPressed="@color/accent_dark"
+        app:fab_size="normal"
+        android:src="@drawable/ic_check_white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:elevation="4dp"
+        android:layout_gravity="right"/>
+
+</RelativeLayout>
