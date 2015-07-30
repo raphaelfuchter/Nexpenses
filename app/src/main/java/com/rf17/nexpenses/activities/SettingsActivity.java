@@ -7,11 +7,14 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.utils.AppPreferences;
@@ -40,13 +43,15 @@ public class SettingsActivity extends PreferenceActivity {
         toolbar.setTitle(getResources().getString(R.string.action_settings));
 
         // Configurações
-        findPreference("prefPassword").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        findPreference("prefPasswordBoolean").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (newValue instanceof Boolean) {
                     Boolean value = (Boolean) newValue;
                     appPreferences.setPasswordBooleanPref(value);
-                    //Abre dialog
+                    if(value) {
+                        openDialogSenha();
+                    }
                 }
                 return true;
             }
@@ -90,6 +95,19 @@ public class SettingsActivity extends PreferenceActivity {
         LayoutInflater.from(this).inflate(layoutResID, contentWrapper, true);
         getWindow().setContentView(contentView);
 
+    }
+
+    private void openDialogSenha(){
+        new MaterialDialog.Builder(this)
+                .title(R.string.settings_password)
+                .inputMaxLengthRes(4, R.color.material_blue_grey_800)
+                .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD)
+                .input(null, null, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, CharSequence input) {
+                        appPreferences.setPassword(input.toString());
+                    }
+                }).show();
     }
 
     @Override

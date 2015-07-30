@@ -8,7 +8,7 @@
 
         <!-- Senha -->
         <CheckBoxPreference
-            android:key="prefPassword"
+            android:key="prefPasswordBoolean"
             android:title="@string/settings_password"
             android:summary="@string/settings_password_description"
             android:defaultValue="false" />

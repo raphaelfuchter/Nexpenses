@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
+        final AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
 
         if(!appPreferences.getPasswordBooleanPref()){
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -44,12 +44,14 @@ public class LoginActivity extends AppCompatActivity {
             findViewById(R.id.fab_entrar).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        //Verifica login
-
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+                        EditText senha = (EditText) findViewById(R.id.pincode);
+                        if (appPreferences.getPassword().equals(senha.getText().toString())) {//Verifica se a senha foi digitada corretamente
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Senha incorreta!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             );

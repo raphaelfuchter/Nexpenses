@@ -51,13 +51,13 @@
     <string name="settings_default_customization_description">Restaurar as cores para os valores padrão.</string>
     <string name="settings_googleplay">Avaliar na Google Play</string>
     <string name="settings_googleplay_description">Você tem alguns segundos para avaliar este aplicativo? Queremos ouvir a sua opinião</string>
-    <string name="settings_report_bugs">Reporte bugs ou requisite funções</string>
+    <string name="settings_report_bugs">Reporte erros ou requisite novas funções</string>
     <string name="settings_about">Sobre o aplicativo</string>
 
     <!-- About -->
     <string name="about_description_1">Desenvolvedor</string>
 
     <!-- Toasts -->
-    <string name="tap_exit">Toque novamente para fechar o app</string>
+    <string name="tap_exit">Pressione novamente para fechar o aplicativo</string>
 
 </resources>

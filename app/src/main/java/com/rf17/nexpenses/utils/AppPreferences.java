@@ -36,7 +36,7 @@ public class AppPreferences {
     }
 
 
-    public String getPassoword() {
+    public String getPassword() {
         return sharedPreferences.getString(KeyPassword, "");
     }
     public void setPassword(String password) {

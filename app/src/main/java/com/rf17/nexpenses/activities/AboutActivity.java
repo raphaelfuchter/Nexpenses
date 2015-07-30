@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rf17.nexpenses.NexpensesApplication;
@@ -44,7 +45,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void setScreenElements() {
-        TextView header = (TextView) findViewById(R.id.header);
+        RelativeLayout header = (RelativeLayout) findViewById(R.id.header_about);
         TextView appNameVersion = (TextView) findViewById(R.id.app_name);
         CardView about_developer = (CardView) findViewById(R.id.about_developer);
         CardView about_googleplay = (CardView) findViewById(R.id.about_googleplay);
