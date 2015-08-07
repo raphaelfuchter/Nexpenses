@@ -13,18 +13,20 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.activities.MainActivity;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Lancamento;
+import com.rf17.nexpenses.services.LancamentoService;
 import com.rf17.nexpenses.utils.StringUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.AppViewHolder> {
 
     private List<Lancamento> lancamentos;
-    //private List<Lancamento> lancamentosSearch;
     private Context context;
 
     public LancamentoAdapter(List<Lancamento> lancamentos, Context context) {
@@ -36,13 +38,6 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
     public int getItemCount() {
         return lancamentos.size();
     }
-
-    /*
-    public void clear() {
-        lancamentos.clear();
-        notifyDataSetChanged();
-    }
-    */
 
     @Override
     public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
@@ -65,7 +60,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
 
     }
 
-    private void setButtonEvents(AppViewHolder appViewHolder, final Lancamento lancamento) {
+    private void setButtonEvents(final AppViewHolder appViewHolder, final Lancamento lancamento) {
         CardView cardView = appViewHolder.vCard;
 
         cardView.setOnClickListener(new View.OnClickListener() {
@@ -96,12 +91,19 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
                                     lancamentoDao.delete(lancamento);
                                     lancamentoDao.close();
 
-                                    //Data data = (Data) spinner_periodo.getSelectedItem();
-                                    //filtrar(data.getDate());//Atualiza lista novamente
+                                    lancamentoDao.open();
+                                    lancamentos = lancamentoDao.ListAll(new Date());
+                                    lancamentoDao.close();
 
-                                    //Excluido com sucesso!
+                                    LancamentoAdapter lancamentoAdapter = new LancamentoAdapter(lancamentos, context);
+                                    MainActivity.recyclerView.setAdapter(lancamentoAdapter);
+
+                                    LancamentoService.calculaDefineSaldo(lancamentos);
+
+                                    //Excluido com sucesso! TODO CRIAR SNACKBAR
 
                                 } catch (Exception e) {
+                                    e.printStackTrace();
                                     //UtilsApp.showToast(MainActivity.this, e.getMessage());
                                 }
                             }
@@ -115,46 +117,6 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
             }
         });
     }
-
-    /*
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                final FilterResults oReturn = new FilterResults();
-                final List<Lancamento> results = new ArrayList<>();
-                if (lancamentosSearch == null) {
-                    lancamentosSearch = lancamentos;
-                }
-                if (charSequence != null) {
-                    if (lancamentosSearch != null && lancamentosSearch.size() > 0) {
-                        for (final Lancamento lancamento : lancamentosSearch) {
-                            if (lancamento.getDescricao().toLowerCase().contains(charSequence.toString())) {
-                                results.add(lancamento);
-                            }
-                        }
-                    }
-                    oReturn.values = results;
-                    oReturn.count = results.size();
-                }
-                return oReturn;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                if (filterResults.count > 0) {
-                    MainActivity.setResultsMessage(false);
-                } else {
-                    MainActivity.setResultsMessage(true);
-                }
-
-                //lancamentos = (ArrayList<Lancamento>) filterResults.values;
-
-                notifyDataSetChanged();
-            }
-        };
-    }
-    */
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {

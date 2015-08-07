@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.rf17.nexpenses.dao.db.DataBaseHandler;
 import com.rf17.nexpenses.model.Data_filtro;
@@ -117,8 +118,9 @@ public class LancamentoDao {
 
     public List<Data_filtro> ListMonths() throws Exception {
         try {
-            String selectQuery = " select "
-                    + " case strftime('%m', date(data)) "
+            String selectQuery = " select"
+                    + " strftime('%m', data) as int_month, "
+                    + " case strftime('%m', data) "
                     + " when '01' then 'Janeiro' "
                     + " when '02' then 'Fevereiro' "
                     + " when '03' then 'Março' "
@@ -132,17 +134,17 @@ public class LancamentoDao {
                     + " when '11' then 'Novembro' "
                     + " when '12' then 'Dezembro' "
                     + " else '' end as month_name, "
-                    + " strftime('%Y', data) as year,"
-                    + " strftime('%m', date(data)) as month  "
-                    + " from lancamento GROUP BY month, year ORDER BY data desc; ";
+                    + " strftime('%Y', data) as year "
+                    + " from lancamento GROUP BY int_month, year ORDER BY data desc; ";
             Cursor cursor = database.rawQuery(selectQuery, null);
             cursor.moveToFirst();
             List<Data_filtro> meses = new ArrayList<>();
 
             while (!cursor.isAfterLast()) {
-                String descricao_mes = cursor.getString(0);
-                int ano = cursor.getInt(1);
-                int mes = cursor.getInt(2);
+
+                int mes = Integer.parseInt(cursor.getString(0));
+                String descricao_mes = cursor.getString(1);
+                int ano = cursor.getInt(2);
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(ano, mes-1, 1);

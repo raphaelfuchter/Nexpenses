@@ -115,7 +115,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     try {
-                        if (StringUtils.formataVerificaValor(editText_valor.getText().toString()) > 0) {
+                        if (StringUtils.formataVerificaValor(editText_valor.getText().toString()) > 0.01) {
                             fab_save.setVisibility(View.VISIBLE);
                         }else{
                             fab_save.setVisibility(View.GONE);
@@ -150,7 +150,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
             lancamento.setData(sdf.parse(editText_data.getText().toString()));
             lancamento.setDescricao(editText_descricao.getText().toString());
 
-            if (lancamento.getValor() == 0.0) {
+            if (lancamento.getValor() < 0.01) {
                 throw new Exception("Valor deve ser maior que 0,00 (zero)");
             } else {
                 lancamentoDao.open();

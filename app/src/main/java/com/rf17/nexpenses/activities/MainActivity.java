@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +15,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.adapters.LancamentoAdapter;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Data_filtro;
 import com.rf17.nexpenses.model.Lancamento;
-import com.rf17.nexpenses.utils.StringUtils;
+import com.rf17.nexpenses.services.LancamentoService;
 import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 import com.mikepenz.materialdrawer.Drawer;
@@ -35,55 +33,34 @@ public class MainActivity extends AppCompatActivity {
 
     private LancamentoDao lancamentoDao = new LancamentoDao(this);
 
-    private Boolean doubleBackToExitPressedOnce = false;
-    private Toolbar toolbar;
     private Context context;
-    private RecyclerView recyclerView;
-    //private PullToRefreshView pullToRefreshView;
-    //private ProgressWheel progressWheel;
+    public static RecyclerView recyclerView;
+    public static TextView saldo_txt;
     private Drawer drawer;
-    //private MenuItem searchItem;
-    //private SearchView searchView;
-    //private static LinearLayout noResults;
+    //private static LinearLayout noResults; TODO Criar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            //AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
             this.context = this;
 
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle(R.string.app_name);
-            }
-
-            UtilsApp.setAppColor(getWindow(), toolbar);
-
             recyclerView = (RecyclerView) findViewById(R.id.appList);
-            //pullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
-            //fastScroller = (VerticalRecyclerViewFastScroller) findViewById(R.id.fast_scroller);
-           // progressWheel = (ProgressWheel) findViewById(R.id.progress);
-            //noResults = (LinearLayout) findViewById(R.id.noResults);
+            saldo_txt = (TextView) findViewById(R.id.saldo);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-            //fastScroller.setRecyclerView(recyclerView);
-            //recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
-            //pullToRefreshView.setEnabled(false);
-
+            setSupportActionBar(toolbar);//Define a ActionBar
+            if (getSupportActionBar() != null) { getSupportActionBar().setTitle(R.string.app_name); }//Define o nome
+            UtilsApp.setAppColor(getWindow(), toolbar);//Define a cor do app
+            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);//Define NavigationDrawer
 
             //recyclerView.setHasFixedSize(true);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(linearLayoutManager);
 
-            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
-
-           // progressWheel.setBarColor(appPreferences.getPrimaryColorPref());
-           // progressWheel.setVisibility(View.VISIBLE);
-
-            // ## Spinner Periodo ##
+            // Spinner Período
             lancamentoDao.open();
             List<Data_filtro> list_periodo = lancamentoDao.ListMonths();
             lancamentoDao.close();
@@ -92,19 +69,18 @@ public class MainActivity extends AppCompatActivity {
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(dataAdapter);
 
-            //Listener periodo
+            // Listener Período
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     Data_filtro data = (Data_filtro) spinner.getSelectedItem();
-                    filtrar(data.getDate());//Filtra pelo periodo/mes selecionado
+                    filtrar(data.getDate());//Filtra pelo periodo/mês selecionado
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) { }
             });
 
-            //Botao nova despesa
+            // Botão nova despesa
             findViewById(R.id.fab_despesa).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            //Botao nova receita
+            // Botão nova receita
             findViewById(R.id.fab_receita).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -141,9 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void filtrar(Date data) {
         try {
-            //progressWheel.setVisibility(View.VISIBLE);
-            //progressWheel.setProgress(100L);
-
             lancamentoDao.open();
             List<Lancamento> lancamentos = lancamentoDao.ListAll(data);
             lancamentoDao.close();
@@ -151,81 +124,16 @@ public class MainActivity extends AppCompatActivity {
             LancamentoAdapter lancamentoAdapter = new LancamentoAdapter(lancamentos, context);
             recyclerView.setAdapter(lancamentoAdapter);
 
-            double saldo = 0.0;
-            for(Lancamento lancamento : lancamentos){
-                if(lancamento.getTipo().equals("R")) {//Receita
-                    saldo += lancamento.getValor();
-                }else{//Despesa
-                    saldo -= lancamento.getValor();
-                }
-            }
-            ((TextView) findViewById(R.id.saldo)).setText(StringUtils.getPrecoFormatado(saldo));
-
-            //pullToRefreshView.setEnabled(true);
-            //progressWheel.setVisibility(View.GONE);
-
-            //searchItem.setVisible(true);
-
-           // setPullToRefreshView(pullToRefreshView);
-            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);
+            LancamentoService.calculaDefineSaldo(lancamentos);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    /*
-    private void setPullToRefreshView(final PullToRefreshView pullToRefreshView) {
-        pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                lancamentoAdapter.clear();
-                recyclerView.setAdapter(null);
-                filtrar(new Date());
-
-                pullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        pullToRefreshView.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        });
-    }
-
-
-    @Override
-    public boolean onQueryTextChange(String search) {
-        if (search.isEmpty()) {
-            ((LancamentoAdapter) recyclerView.getAdapter()).getFilter().filter("");
-        } else {
-            ((LancamentoAdapter) recyclerView.getAdapter()).getFilter().filter(search);
-        }
-
-        return false;
-    }
-
-
-    public static void setResultsMessage(Boolean result) {
-        if (result) {
-           // noResults.setVisibility(View.VISIBLE);
-            //fastScroller.setVisibility(View.GONE);
-        } else {
-           // noResults.setVisibility(View.GONE);
-           // fastScroller.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-    */
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
@@ -233,21 +141,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (drawer.isDrawerOpen()) {
             drawer.closeDrawer();
-        //} else if (searchItem.isVisible() && !searchView.isIconified()) {
-        //   searchView.onActionViewCollapsed();
         } else {
-            if (doubleBackToExitPressedOnce) {
-                super.onBackPressed();
-                return;
-            }
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, R.string.tap_exit, Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce = false;
-                }
-            }, 2000);
+            super.onBackPressed();
         }
     }
 

@@ -4,7 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.rf17.nexpenses.utils.FileUtils;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class DataBaseHandler extends SQLiteOpenHelper {
@@ -48,7 +52,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         File newDb = new File(db_import);//Arquivo que ira ser importado
         File oldDb = new File(db_local);//Arquivo do bd local
         if (newDb.exists()) {//Se achar arquivo para ser restaurado
-            //FileUtils.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));//Faz a transferencia
+            FileUtils.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));//Faz a transferencia
             getWritableDatabase().close();// Acessa a db criada, para o DataBaseHandler armazenar e marcar como criada.
             return true;//Retorna para dizer que foi importado com sucesso
         }

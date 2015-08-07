@@ -1,11 +1,15 @@
 package com.rf17.nexpenses.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
@@ -13,12 +17,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
+import com.rf17.nexpenses.dao.db.DataBaseHandler;
 import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.UtilsApp;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 
 public class SettingsActivity extends PreferenceActivity {
     // Load Settings
@@ -63,7 +74,40 @@ public class SettingsActivity extends PreferenceActivity {
         //prefNavigationColor = findPreference("prefNavigationColor");
         //Preference prefDefaultValues = findPreference("prefDefaultValues");
 
-        // Backup
+        // Exportar Dados
+        findPreference("prefExport").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                try {
+                    if (Environment.getExternalStorageDirectory().canWrite()) {// Verifica se existe permissao de escrita/write
+                        final File currentDB = getDatabasePath("nexpenses_db");
+                        File backupDB = new File(Environment.getExternalStorageDirectory(), "/download/nexpenses_database_copy.db");
+
+                        FileChannel src = new FileInputStream(currentDB).getChannel();
+                        FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                        dst.transferFrom(src, 0, src.size());
+                        src.close();
+                        dst.close();
+
+                        Toast.makeText(getApplicationContext(), "Backup do banco de dados criado com sucesso! O arquivo foi salvo dentro da pasta 'download' do seu aparelho, com o nome de 'nexpenses_database_copy.db'", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Não existe permissão para escrita/leitura de arquivos no dispositivo!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Erro ao realizar backup do banco de dados! (Motivo: " + e.getMessage() + ")", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+        });
+
+        // Importar Dados
+        findPreference("prefImport").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                dialogConfirmaImport();
+                return true;
+            }
+        });
 
         // Sobre
         Preference prefVersion = findPreference("prefVersion");
@@ -115,6 +159,45 @@ public class SettingsActivity extends PreferenceActivity {
         context.startActivity(new Intent(context, MainActivity.class));
         overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
         finish();
+    }
+
+    /**
+     * Abre dialog para confirmar import do bd
+     */
+    public void dialogConfirmaImport() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Você tem certeza que deseja importar/restaurar o banco de dados? (Todas as informações salvas localmente, serão perdidas) ");
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {// Se clicar em SIM, exclui o pedido
+                dialog.dismiss();// Fecha dialog
+
+                try {
+                    DataBaseHandler dbHelper = new DataBaseHandler(context);
+                    SQLiteDatabase database = dbHelper.getWritableDatabase();//Open
+
+                    String db_local = database.getPath();
+                    String db_import = Environment.getExternalStorageDirectory().getPath() + "/download/sd.db";
+
+                    if (dbHelper.importDatabase(db_local, db_import)) {
+                        Toast.makeText(SettingsActivity.this, "Importação/Restauração do banco de dados realizado com sucesso!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SettingsActivity.this, "Arquivo para ser restaurado não encontrado! O arquivo deve estar localizado dentro da pasta 'download' do seu aparelho, com o nome de 'nx.db'", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(SettingsActivity.this, "Erro ao realizar importação/restauração do banco de dados! (Motivo: " + e.getMessage() + ")", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {// Se clicar em NAO, nao faz nada
+                dialog.dismiss();// Fecha dialog
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();// Mostra dialog
     }
 
 }
