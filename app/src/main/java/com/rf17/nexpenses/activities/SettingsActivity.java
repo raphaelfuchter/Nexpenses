@@ -156,8 +156,8 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     public void onBackPressed() {
-        context.startActivity(new Intent(context, MainActivity.class));
-        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+        Intent myIntent = new Intent(SettingsActivity.this, MainActivity.class);
+        startActivity(myIntent);
         finish();
     }
 

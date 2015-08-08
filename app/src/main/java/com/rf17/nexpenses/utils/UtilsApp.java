@@ -7,8 +7,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.rf17.nexpenses.NexpensesApplication;
@@ -73,6 +75,19 @@ public class UtilsApp {
                 toolbar.setBackgroundColor(appPreferences.getPrimaryColorPref());
             }
         }
+    }
+
+    /**
+     * Esconde o teclado do dispositivo
+     *
+     * @param activity
+     * 			- Activity/tela que será utilizado para esconder o teclado
+     * @param view
+     * 			- ...
+     */
+    public static void hideKeyboard(Activity activity, View view) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
     }
 
 }

@@ -193,8 +193,8 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     // ## Voltar ##
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(LancamentoActivity.this, MainActivity.class));
-        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+        Intent myIntent = new Intent(LancamentoActivity.this, MainActivity.class);
+        startActivity(myIntent);
         finish();
     }
     // ## Voltar ##

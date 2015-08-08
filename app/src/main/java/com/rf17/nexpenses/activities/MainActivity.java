@@ -16,12 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.rf17.nexpenses.NexpensesApplication;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.adapters.LancamentoAdapter;
 import com.rf17.nexpenses.dao.LancamentoDao;
 import com.rf17.nexpenses.model.Data_filtro;
 import com.rf17.nexpenses.model.Lancamento;
 import com.rf17.nexpenses.services.LancamentoService;
+import com.rf17.nexpenses.utils.AppPreferences;
 import com.rf17.nexpenses.utils.UtilsApp;
 import com.rf17.nexpenses.utils.UtilsUI;
 import com.mikepenz.materialdrawer.Drawer;
@@ -53,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);//Define a ActionBar
             if (getSupportActionBar() != null) { getSupportActionBar().setTitle(R.string.app_name); }//Define o nome
             UtilsApp.setAppColor(getWindow(), toolbar);//Define a cor do app
-            drawer = UtilsUI.setNavigationDrawer((Activity) context, context, toolbar);//Define NavigationDrawer
+            drawer = setNavigationDrawer((Activity) context, context, toolbar);//Define NavigationDrawer
 
             //recyclerView.setHasFixedSize(true);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -142,8 +151,72 @@ public class MainActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen()) {
             drawer.closeDrawer();
         } else {
-            super.onBackPressed();
+            finish();
+            System.exit(0);
         }
+    }
+
+    public Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar) {
+        int header;
+        AppPreferences appPreferences = NexpensesApplication.getAppPreferences();
+
+        if (UtilsUI.getDayOrNight() == 1) {
+            header = R.drawable.header_day;
+        } else {
+            header = R.drawable.header_night;
+        }
+
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(activity)
+                .withHeaderBackground(header)
+                .build();
+
+        return new DrawerBuilder()
+                .withActivity(activity)
+                .withToolbar(toolbar)
+                .withAccountHeader(headerResult)
+                .withStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8))
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_lancamentos)).withIcon(FontAwesome.Icon.faw_money),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_categorias)).withIcon(FontAwesome.Icon.faw_tags).withCheckable(false),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_graficos)).withIcon(FontAwesome.Icon.faw_area_chart).withCheckable(false),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart).withCheckable(false),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(FontAwesome.Icon.faw_cog).withCheckable(false),
+                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(FontAwesome.Icon.faw_info_circle).withCheckable(false)
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 1://Categorias
+                                UtilsApp.showToast(((Activity) context), "Em breve");
+                                break;
+                            case 2://Graficos
+                                UtilsApp.showToast(((Activity) context), "Em breve");
+                                break;
+                            case 4://Apoie o Desenvolvimento
+                                UtilsApp.showToast(((Activity) context), "Em breve");
+                                break;
+                            case 6://Configuracoes
+                                Intent intent_settings = new Intent(MainActivity.this, SettingsActivity.class);
+                                startActivity(intent_settings);
+                                finish();
+                                break;
+                            case 7://Ajuda e Feedback
+                                Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
+                                startActivity(intent_about);
+                                finish();
+                                break;
+                            default:
+                                break;
+                        }
+
+                        return false;
+                    }
+                }).build();
+
     }
 
 }

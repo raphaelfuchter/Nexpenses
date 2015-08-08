@@ -1,6 +1,7 @@
 package com.rf17.nexpenses.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -72,15 +73,17 @@ public class AboutActivity extends AppCompatActivity {
         about_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(UtilsApp.goToSite("rf17@oulook.com.br"));
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                i.setData(Uri.parse("mailto:" + "rf17@outlook.com.br"));
+                startActivity(Intent.createChooser(i, "Enviar email"));
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(AboutActivity.this, MainActivity.class));
-        overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+        Intent myIntent = new Intent(AboutActivity.this, MainActivity.class);
+        startActivity(myIntent);
         finish();
     }
 
