@@ -178,8 +178,6 @@ public class MainActivity extends AppCompatActivity {
                 .withStatusBarColor(UtilsUI.darker(appPreferences.getPrimaryColorPref(), 0.8))
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_lancamentos)).withIcon(FontAwesome.Icon.faw_money),
-                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_categorias)).withIcon(FontAwesome.Icon.faw_tags).withCheckable(false),
-                        new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_graficos)).withIcon(FontAwesome.Icon.faw_area_chart).withCheckable(false),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apoie_desenvolvimento)).withIcon(FontAwesome.Icon.faw_heart).withCheckable(false),
                         new DividerDrawerItem(),
@@ -190,21 +188,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position) {
-                            case 1://Categorias
+                            case 2://Apoie o Desenvolvimento
                                 UtilsApp.showToast(((Activity) context), "Em breve");
                                 break;
-                            case 2://Graficos
-                                UtilsApp.showToast(((Activity) context), "Em breve");
-                                break;
-                            case 4://Apoie o Desenvolvimento
-                                UtilsApp.showToast(((Activity) context), "Em breve");
-                                break;
-                            case 6://Configuracoes
+                            case 4://Configurações
                                 Intent intent_settings = new Intent(MainActivity.this, SettingsActivity.class);
                                 startActivity(intent_settings);
                                 finish();
                                 break;
-                            case 7://Ajuda e Feedback
+                            case 5://Ajuda e Feedback
                                 Intent intent_about = new Intent(MainActivity.this, AboutActivity.class);
                                 startActivity(intent_about);
                                 finish();

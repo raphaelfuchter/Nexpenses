@@ -29,7 +29,7 @@
             android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
             android:background="@null"
-            android:spinnerMode="dialog"
+            android:spinnerMode="dropdown"
             android:layout_centerVertical="true" />
         <!-- Período -->
 
@@ -38,7 +38,7 @@
             android:id="@+id/saldo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="saldo"
+            android:text=""
             android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_marginRight="16dp"

@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.widgets.SnackBar;
 import com.rf17.nexpenses.activities.LancamentoActivity;
 import com.rf17.nexpenses.R;
 import com.rf17.nexpenses.activities.MainActivity;
@@ -100,16 +102,18 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Ap
 
                                     LancamentoService.calculaDefineSaldo(lancamentos);
 
-                                    //Excluido com sucesso! TODO CRIAR SNACKBAR
+                                    new SnackBar(((Activity) context),
+                                                 context.getResources().getString(R.string.snack_excluido_sucesso)).show();
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    //UtilsApp.showToast(MainActivity.this, e.getMessage());
+                                    Toast.makeText(context, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
 
                             @Override
-                            public void onNegative(MaterialDialog dialog) { }
+                            public void onNegative(MaterialDialog dialog) {
+                            }
                         })
                         .show();
 

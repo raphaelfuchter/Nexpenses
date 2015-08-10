@@ -14,9 +14,8 @@
     <string name="button_cancel">Cancelar</string>
     <string name="button_ok">OK</string>
     <string name="button_undo">Voltar</string>
+    <string name="button_close">Fechar</string>
 
-    <string name="search">Pesquisar</string>
-    <string name="search_hint">Pesquisar...</string>
     <string name="search_noresults">Não foram encontrados resultados para sua pesquisa</string>
 
     <!-- Lancamento -->
@@ -39,7 +38,6 @@
     <string name="settings_import">Importar dados</string>
     <string name="settings_import_description">Importar dados do armazenamento do dispositivo e substituir os dados do aplicativo</string>
 
-    <string name="settings_sort_mode">Classificar por</string>
     <string name="settings_customizations">Temas (Necessário Android 5.0+) - Em Breve</string>
     <string name="settings_primary_color">Cor Primária</string>
     <string name="settings_primary_color_description">A cor primária a ser usada. Padrão é Material Blue.</string>
@@ -57,7 +55,7 @@
     <!-- About -->
     <string name="about_description_1">Desenvolvedor</string>
 
-    <!-- Toasts -->
-    <string name="tap_exit">Pressione novamente para fechar o aplicativo</string>
+    <!-- SnackBar -->
+    <string name="snack_excluido_sucesso">Excluído com sucesso!</string>
 
 </resources>
