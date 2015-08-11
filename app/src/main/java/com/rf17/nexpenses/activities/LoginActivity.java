@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         EditText senha = (EditText) findViewById(R.id.pincode);
                         if (appPreferences.getPassword().equals(senha.getText().toString())) {//Verifica se a senha foi digitada corretamente
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            overridePendingTransition(R.anim.fade_forward, R.anim.slide_out_right);
+                            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(myIntent);
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Senha incorreta!", Toast.LENGTH_LONG).show();

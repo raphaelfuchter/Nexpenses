@@ -32,7 +32,7 @@ import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
 public class SettingsActivity extends PreferenceActivity {
-    // Load Settings
+
     private AppPreferences appPreferences;
     private Toolbar toolbar;
 
@@ -115,8 +115,9 @@ public class SettingsActivity extends PreferenceActivity {
         prefVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(getApplicationContext(), AboutActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
+                Intent myIntent = new Intent(SettingsActivity.this, AboutActivity.class);
+                startActivity(myIntent);
+                finish();
                 return true;
             }
         });
@@ -131,7 +132,7 @@ public class SettingsActivity extends PreferenceActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                voltar();
             }
         });
 
@@ -154,11 +155,15 @@ public class SettingsActivity extends PreferenceActivity {
                 }).show();
     }
 
-    @Override
-    public void onBackPressed() {
+    private void voltar(){
         Intent myIntent = new Intent(SettingsActivity.this, MainActivity.class);
         startActivity(myIntent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        voltar();
     }
 
     /**

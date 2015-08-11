@@ -71,14 +71,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
 
-            //Voltar
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onBackPressed();
-                }
-            });
-
             //DatePicker
             editText_data.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,7 +98,6 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 @Override
                 public void onClick(View view) {
                     salvar();
-                    onBackPressed();
                 }
             });
 
@@ -157,9 +148,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 lancamentoDao.saveOrUpdate(lancamento);// Atualiza ou salva
                 lancamentoDao.close();
 
-                //Salvo com sucesso
-
-                onBackPressed();
+                voltar();
             }
         } catch (Exception e) {
             UtilsApp.showToast(LancamentoActivity.this, "Erro ao salvar (Motivo: " + e.getMessage() + ")");
@@ -181,8 +170,8 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
-                finish();
+            case 16908332://Voltar
+                voltar();
                 return true;
         }
 
@@ -190,12 +179,16 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
     }
     // ## Action Bar ##
 
-    // ## Voltar ##
-    @Override
-    public void onBackPressed() {
+    private void voltar(){
         Intent myIntent = new Intent(LancamentoActivity.this, MainActivity.class);
         startActivity(myIntent);
         finish();
+    }
+
+    // ## Voltar ##
+    @Override
+    public void onBackPressed() {
+        voltar();
     }
     // ## Voltar ##
 

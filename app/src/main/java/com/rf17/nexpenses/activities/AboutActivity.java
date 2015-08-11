@@ -38,7 +38,7 @@ public class AboutActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                voltar();
             }
         });
 
@@ -80,11 +80,15 @@ public class AboutActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
+    private void voltar(){
         Intent myIntent = new Intent(AboutActivity.this, MainActivity.class);
         startActivity(myIntent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        voltar();
     }
 
 }
