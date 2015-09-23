@@ -101,7 +101,7 @@ public class LancamentoActivity extends AppCompatActivity implements DatePickerD
                 }
             });
 
-            editText_valor.addTextChangedListener(new TextWatcher() {// ValueChange quantidade
+            editText_valor.addTextChangedListener(new TextWatcher() {// ValueChange valor
                 public void afterTextChanged(Editable s) { }
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
                 public void onTextChanged(CharSequence s, int start, int before, int count) {

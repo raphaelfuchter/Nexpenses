@@ -16,7 +16,8 @@ public class StringUtils {
      */
     public static double formataVerificaValor(String valor) throws Exception {
         try{
-            return !valor.isEmpty() ? formato.parse(valor).doubleValue() : 0.0;
+            //return !valor.isEmpty() ? formato.parse(valor).doubleValue() : 0.0;
+            return !valor.toString().equals("") ? Double.parseDouble(valor.toString().replace(",", ".")) : 0.0;
         }catch(Exception e){
             throw new Exception("Erro ao formatar e/ou verificar valor digitado!");
         }
